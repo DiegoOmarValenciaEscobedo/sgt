@@ -1,0 +1,74 @@
+{% extends 'layouts/base.html' %}
+
+{% block title %} Administrador {% endblock title %}
+
+<!-- Specific CSS goes HERE -->
+{% block stylesheets %}
+
+<link rel="stylesheet" href="https://cdn.datatables.net/1.12.1/css/dataTables.bootstrap5.min.css" />
+<link rel="stylesheet" href="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.min.css">
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs5/dt-1.12.1/r-2.3.0/datatables.min.css" />
+{% endblock stylesheets %}
+
+{% block content %}
+
+<!-- Page content -->
+<div class="container-fluid mt-2">
+
+  <table id="example" class="display dataTable dt-responsive table-hover" style="width:100%">
+    <thead>
+      <tr>
+        <th>RFC / No. Control</th>
+        <th>Nombre</th>
+        <th>Tipo Usuario</th>
+        <th>Correo</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for dir in directorio%}
+      <tr>
+        {% if dir.tipouser == 'T_O' or dir.tipouser == 'T_S' %}
+        <td><a href="{% url 'admin_tutorado' dir.id %}">{{dir.idTec}}</a></td>
+        <td><a href="{% url 'admin_tutorado' dir.id %}">{{dir.nombre}} {{dir.aPaterno}} {{dir.aMaterno}}</a></td>
+        {% else %}
+        <td><a href="{% url 'admin_docente' dir.id %}">{{dir.idTec}}</a></td>
+        <td><a href="{% url 'admin_docente' dir.id %}">{{dir.nombre}} {{dir.aPaterno}} {{dir.aMaterno}}</a></td>
+        {% endif %}
+        <td>{{dir.get_tipouser_display}}</td>
+        <td>{{dir.email}}</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+    <tfoot>
+      <th>RFC / No. Control</th>
+      <th>Nombre</th>
+      <th>Tipo Usuario</th>
+      <th>Correo</th>
+    </tfoot>
+  </table>
+  {% include "includes/footer.html" %}
+
+</div>
+
+{% endblock content %}
+
+<!-- Specific JS goes HERE -->
+{% block javascripts %}
+
+<script src="/static/assets/vendor/chart.js/dist/Chart.min.js"></script>
+<script src="/static/assets/vendor/chart.js/dist/Chart.extension.js"></script>
+
+{% endblock javascripts %}
+<script>
+  $(document).ready(function () {
+    $('#example').DataTable({
+      responsive: true,   
+        pagingType: 'numbers',
+        "autoWidth": false,
+        scrollX: true,
+        language: {
+            url: "https://cdn.datatables.net/plug-ins/1.12.1/i18n/es-MX.json"
+        },
+    });
+  });
+</script>

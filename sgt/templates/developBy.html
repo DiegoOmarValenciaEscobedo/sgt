@@ -1,0 +1,87 @@
+{% extends 'layouts/base.html' %}
+
+{% block title %} Dashboard {% endblock title %}
+
+<!-- Specific CSS goes HERE -->
+{% block stylesheets %}
+<link rel="stylesheet" href="/static/assets/css/developBy.css">
+{% endblock stylesheets %}
+
+{% block content %}
+
+<!-- Page content -->
+<div class="container-fluid">
+  <div class="creditos">
+    <h1 class="text-center">Desarrollado por:</h1>
+    <div class="perfiles d-flex justify-content-around flex-wrap">
+      <div class="perfil card">
+        <div class="card-content">
+          <div class="image">
+            <img src="/static/assets/img/brand/Perfiles/Hueso.svg" alt="Lider" class="image-fluid" style="padding-right: 0 !important;">
+          </div>
+          <div class="puesto d-flex flex-column justify-content-around">
+            <span class="name">Héctor David Reyes Reyes</span>
+            <span class="campoPuesto">Líder de proyecto</span>
+          </div>
+        </div>
+      </div>
+      <div class="perfil card">
+        <div class="card-content">
+          <div class="image">
+            <img src="/static/assets/img/brand/Perfiles/Pablo.svg" alt="Lider" class="image-fluid">
+          </div>
+          <div class="puesto d-flex flex-column">
+            <span class="name">Juan Pablo Juárez Castillo</span>
+            <span class="campoPuesto">Desarrollador</span>
+          </div>
+        </div>
+      </div>
+      <div class="perfil card">
+        <div class="card-content">
+          <div class="image">
+            <img src="/static/assets/img/brand/Perfiles/Arturo.svg" alt="Lider" class="image-fluid">
+          </div>
+          <div class="puesto d-flex flex-column">
+            <span class="name">Arturo Martínez Fuentes</span>
+            <span class="campoPuesto">Desarrollador</span>
+          </div>
+        </div>
+      </div>
+      <div class="perfil card">
+        <div class="card-content">
+          <div class="image">
+            <img src="/static/assets/img/brand/Perfiles/Angel.svg" alt="Lider" class="image-fluid">
+          </div>
+          <div class="puesto d-flex flex-column">
+            <span class="name">José Ángel Gallegos Pérez</span>
+            <span class="campoPuesto">Desarrollador</span>
+          </div>
+        </div>
+      </div>
+      <div class="perfil card">
+        <div class="card-content">
+          <div class="image">
+            <img src="/static/assets/img/brand/Perfiles/Diego.svg" alt="Lider" class="image-fluid">
+          </div>
+          <div class="puesto d-flex flex-column">
+            <span class="name">Diego Omar Valencia <br>Escobedo</span>
+            <span class="campoPuesto">Desarrollador</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% include "includes/footer.html" %}
+</div>
+
+{% endblock content %}
+
+<!-- Specific JS goes HERE -->
+{% block javascripts %}
+
+<script src="/static/assets/vendor/chart.js/dist/Chart.min.js"></script>
+<script src="/static/assets/vendor/chart.js/dist/Chart.extension.js"></script>
+
+{% endblock javascripts %}

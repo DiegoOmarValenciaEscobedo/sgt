@@ -1,0 +1,118 @@
+{% extends 'layouts/base.html' %}
+
+{% block title %} Reporte Semestral del Tutor {% endblock title %}
+
+<!-- Specific CSS goes HERE -->
+{% block stylesheets %}
+<link rel="stylesheet" href="https://cdn.datatables.net/1.12.1/css/dataTables.bootstrap5.min.css" />
+<link rel="stylesheet" href="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.min.css">
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs5/dt-1.12.1/r-2.3.0/datatables.min.css" />
+<link rel="stylesheet" href="https://cdn.datatables.net/buttons/2.2.3/css/buttons.dataTables.min.css">
+{% endblock stylesheets %}
+
+{% block content %}
+
+<!-- Page content -->
+<input id="nombre" hidden value="{{ tutor}}"></input>
+<input id="grupo" hidden value="{{ grupo}}"></input>
+<input id="dep" hidden value="{{departamento}}"></input>
+<div class="container-fluid">
+  <div class="shadow-lg p-3 mb-5 bg-body rounded" style="background-color: white;">
+    <div style="width: 100% !important;">
+      {% if alumnos %}
+      <table id="reporte" class="display table" style="width: 100%;">
+        <thead>
+          <tr style="background-color: black; color: white;">
+            <th>#Control</th>
+            <th>Estudiante</th>
+            <th>Tutoría Grupal</th>
+            <th>Tutoría Individual</th>
+            <th>Estudiantes canalizados <br> en el semestre</th>
+            <th>Observaciones</th>
+            <th>% Asistencia</th>
+          </tr>
+        </thead>
+        <tbody>
+          {%for a in alumnos%}
+          <tr>
+            <td>{{a.noControl.idTec}}</td>
+            <td>{{a.noControl.aPaterno}} {{a.noControl.aMaterno}} {{a.noControl.nombre}}</td>
+            <td>{{a.tutoGrupal}}</td>
+            <td>{{a.tutoIndividual}}</td>
+            <td style="width: 10%;"> {{a.canalizados}} </td>
+            <td>
+              {%if a.observaciones != None%}
+              {{a.observaciones}}
+              {%else%}
+              ---
+              {%endif%}
+            </td>
+            <td> {{a.asistencia}} </td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+
+      <div class="modal fade" id="exampleModal" tabindex="1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h1 class="modal-title fs-5" id="exampleModalLabel">Editar tutorado</h1>
+            </div>
+            <div class="modal-body justify-content-center">
+              <form action="#" method="POST">
+                {% csrf_token %}
+                <div class="Citas d-flex flex-column">
+                  <p><label for="{{ form.tutoriaGrupal.id_for_label }}"
+                      style="font-weight: 600; font-size: 2vh; color: black;">Número de Control:</label>
+                    {{form.noControl}}
+                  </p>
+                  <p><label for="{{ form.tutoriaGrupal.id_for_label }}"
+                      style="font-weight: 600; font-size: 2vh; color: black;">Nombre:</label>
+                    {{form.nombre}}
+                  </p>
+                  <p><label for="{{ form.tutoriaGrupal.id_for_label }}"
+                      style="font-weight: 600; font-size: 2vh; color: black;">Tutoria Grupal:</label>
+                    {{form.tutoriaGrupal}}
+                  </p>
+                  <p><label for="{{ form.tutoriaIndividual.id_for_label }}"
+                      style="font-weight: 600; font-size: 2vh; color: black;">Tutoria Individual:</label><br>
+                    {{form.tutoriaIndividual}}
+                  </p>
+                  <p><label for="{{ form.estudiantes.id_for_label }}"
+                      style="font-weight: 600; font-size: 2vh; color: black;">Estudiantes Canalizados:</label><br>
+                    {{form.estudiantes}}
+                  </p>
+                  <p><label for="{{ form.observaciones.id_for_label }}"
+                      style="font-weight: 600; font-size: 2vh; color: black;">Observaciones:</label><br>
+                    {{form.observaciones}}
+                  </p>
+                  <p><label for="{{ form.porcentaje.id_for_label }}"
+                      style="font-weight: 600; font-size: 2vh; color: black;">% de Asistencia:</label><br>
+                    {{form.porcentaje}}
+                  </p>
+                  <button type="submit" class="btn btn-secondary " id="btnagendar" data-bs-dismiss="modal"
+                    style="background-color: darkblue; color: white;">Guardar</button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+      {% else %}
+      <h3 style="align-self: center;">No es posible realizar el reporte en este momento.</h3>
+      {% endif %}
+    </div>
+  </div>
+
+  {% include "includes/footer.html" %}
+</div>
+
+{% endblock content %}
+
+<!-- Specific JS goes HERE -->
+{% block javascripts %}
+
+<script src="/static/assets/js/tutor/tutor_semestral.js"></script>
+
+{% endblock javascripts %}

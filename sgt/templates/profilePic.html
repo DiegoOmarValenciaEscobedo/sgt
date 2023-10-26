@@ -1,0 +1,68 @@
+{% extends 'layouts/base.html' %}
+
+{% block title %} Cambiar foto de perfil {% endblock title %}
+
+<!-- Specific CSS goes HERE -->
+{% block stylesheets %}{% endblock stylesheets %}
+
+{% block content %}
+
+<style>
+  .iconoNext{
+    color: gray !important;
+    font-size: 66px !important;
+  }
+</style>
+
+
+<!-- Page content -->
+<div class="container-fluid mt-2">
+  <div class="row">
+    <div class="col">
+      <div class="card shadow">
+        <div class="card-header bg-transparent">
+          <h2 class="mb-0">Cambiar foto de perfil</h2>
+        </div>
+
+        <div class="card-body container">
+            <div class="card-body row justify-content-center align-items-center">
+                <div class="col-lg-4 justify-content-center align-items-center text-center">
+                  <img src="{{request.user.fotoDePerfil.url}}" alt="fotito" class="img-thumbnail">
+                </div>
+                <i class="iconoNext fa-solid fa-arrow-right"></i>
+                <div class="col-lg-4 justify-content-center align-items-center text-center">
+                  <img src="/static/assets/img/brand/mensaje1.jpg" class="img-thumbnail" id="preview-img" style="object-fit: cover;">
+                </div>
+            </div>
+        </div>
+        <div class="card-body container" style="padding-top: 0 !important;">
+          <form enctype="multipart/form-data" method="post">
+            {% csrf_token %}
+            <div class="card-body row justify-content-center align-items-center" style="padding-top: 0 !important;">{{form}}
+            </div>
+            
+            <div class="card-body row justify-content-center align-items-center" style="padding-top: 0 !important;">
+              <button class="nav-link active active-pro mt-4 border mr-lg-7 rounded-pill text-center" 
+                style="background:#01075a; width: fit-content; margin: auto !important; color: white !important;">Cambiar foto</button>
+            </div>
+          </form>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  {% include "includes/footer.html" %}
+
+</div>
+
+{% endblock content %}
+
+<!-- Specific JS goes HERE -->
+{% block javascripts %}
+
+<script src="/static/assets/js/changePicture.js"></script>
+<script src="/static/assets/vendor/chart.js/dist/Chart.min.js"></script>
+<script src="/static/assets/vendor/chart.js/dist/Chart.extension.js"></script>
+
+{% endblock javascripts %}

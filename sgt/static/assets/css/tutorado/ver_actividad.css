@@ -1,0 +1,18 @@
+.col-l{
+    width: 150px;
+    align-items: center;
+    text-align: center;
+}
+
+#pill{
+    background-color: rgb(207, 203, 203);
+    margin: 15px;
+}
+
+#pill2{
+    background-color: rgb(21, 18, 182);
+    color: aliceblue;
+    width: 150px;
+    height: 30px;
+    
+}

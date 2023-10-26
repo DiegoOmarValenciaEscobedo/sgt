@@ -1,0 +1,44 @@
+.actividad{
+    box-shadow: none;
+}
+.actividad .image{
+    height: 20vh;
+    width: 20vh;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.actividad .image i{   
+    border-radius: 50%;
+    font-size: 10vh;
+    font-weight: bold;
+    color: black;
+}
+
+.actividad .realizada{
+    border: 10px solid #14AC07;
+}
+.actividad .retrasada{
+    border: 10px solid #860808;
+}
+.actividad .noRealizada{
+    border: 10px solid #f1a008;
+}
+
+.tituloActividad{
+    font-weight: 500;
+    font-size: 24px;
+}
+
+.cierreActividad{
+    font-weight: 500;
+    font-size: 16px;
+    margin: 0;
+}
+
+.actividad p{
+    color: black;
+}
+

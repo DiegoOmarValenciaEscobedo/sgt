@@ -1,0 +1,30 @@
+
+/* Conversacion */
+
+.contenidoHeader{
+    position: relative;
+    width: 100%;
+    border-radius: 0;
+}
+
+.nombreActividad{
+    position: relative;
+    background-color: #000000;    
+    font-weight: bold;
+}
+
+.nombreActividadHeader {
+    color: white;    
+}
+
+.nombreActividadHeader p{
+    font-size: 2vh; 
+}
+
+.contenido{
+    position: relative;
+    overflow: auto;
+    height: auto;
+    width: 70%;
+    font-size: large;
+}

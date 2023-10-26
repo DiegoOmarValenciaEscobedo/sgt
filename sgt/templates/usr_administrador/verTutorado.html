@@ -1,0 +1,155 @@
+{% extends 'layouts/base.html' %}
+
+{% block title %} Informacion Alumno {% endblock title %}
+
+<!-- Specific CSS goes HERE -->
+{% block stylesheets %}
+<link rel="stylesheet" href="/static/assets/css/perfil_docente.css">
+{% endblock stylesheets %}
+
+{% block content %}
+
+<!-- Page content -->
+<div class="container-fluid">
+    {% if mensaje %}
+    <div class="alert alert-success mt-2" role="alert">
+        Actualizado correctamente!
+    </div>
+    {% endif %}
+    <div class="perfil row mt-2">
+        <div class="espacioFotoPerfil card bg-transparent col-12 col-md-5" style="height: 100%;">
+            <div class="card-body">
+                <div class="fotoPerfil">
+                    <img src="../../../media/{{ tutorado.user.fotoDePerfil }}" alt="FotoPerfil" class="image-fluid">
+                </div>
+            </div>
+        </div>
+        <div class="infoPerfil d-flex flex-column justify-content-center col-12 col-md-7 mt-1">
+            <form method="post">
+                {% csrf_token %}
+                <div class="espacioDatosGenerales">
+                    <div class="titulo">
+                        <h3>Datos generales</h3>
+                    </div>
+                    <div class="datos p-2">
+                        <div class="nombreDocente row col-12 mt-2">
+                            <p class="campo col-sm-6">Nombre:</p>
+                            {{ form.Nombre }}
+                        </div>
+                        <div class="nombreApellidos row col-12 mt-2">
+                            <p class="campo col-sm-6">Apellido paterno:</p>
+                            {{ form.AP }}
+                        </div>
+                        <div class="nombreApellidos row col-12 mt-2">
+                            <p class="campo col-sm-6">Apellido materno:</p>
+                            {{ form.AM }}
+                        </div>
+                        <div class="nombreApellidos row col-12 mt-2">
+                            <p class="campo col-sm-6">Fecha de nacimiento:</p>
+                            {{ tutorado.fechaDeNacimiento }}
+                        </div>
+                        <div class="generoDocente row col-12 mt-2">
+                            <p class="campo col-sm-6">Género:</p>
+                            <p class="campo col-sm-6">{{ form.genero }}</p>
+                        </div>
+                        <div class="rfcDocente row col-12 mt-2">
+                            <p class="campo col-sm-6">Curp:</p>
+                            {{ form.Curp }}
+                        </div>
+                        <div class="nombreApellidos row col-12 mt-2">
+                            <p class="campo col-sm-6">Estado civil:</p>
+                            <p class="campo col-sm-6">{{ form.estadoCivil }}</p>
+                        </div>
+                        <div class="nombreApellidos row col-12 mt-2">
+                            <p class="campo col-sm-6">Numero servicio social:</p>
+                            {{ form.NumeroSS }}
+                        </div>
+                    </div>
+                </div>
+                <div class="espacioDatosEscolares mt-2">
+                    <div class="titulo">
+                        <h3>Datos escolares</h3>
+                    </div>
+                    <div class="datos p-2">
+                        <div class="nombreApellidos row col-12 mt-2">
+                            <p class="campo col-sm-6">Numero de control:</p>
+                            {{ form.NoControl }}
+                        </div>
+                        <div class="nombreApellidos row col-12 mt-2">
+                            <p class="campo col-sm-6">Carrera:</p>
+                            <p class="campo col-sm-6">{{ form.carrera }}</p>
+                        </div>
+                        <div class="telefonoDocente row col-12 mt-2">
+                            <p class="campo col-sm-6">Semestre:</p>
+                            {{ form.Semestre }}
+                        </div>
+                        <div class="cubiculoDocente row col-12 mt-2">
+                            <p class="campo col-sm-6">Estatus:</p>
+                            <p class="campo col-sm-6">{{ form.estatus }}</p>
+                        </div>
+                        <div class="nombreApellidos row col-12 mt-2">
+                            <p class="campo col-sm-6">Grupo:</p>
+                            {{ tutorado.grupo.nombre }}
+                        </div>
+                    </div>
+                </div>
+                <div class="espacioDatosEscolares mt-2">
+                    <div class="titulo">
+                        <h3>Datos de contacto</h3>
+                    </div>
+                    <div class="datos p-2">
+                        <div class="nombreApellidos row col-12 mt-2">
+                            <p class="campo col-sm-6">Estado:</p>
+                            <p class="campo col-sm-6">{{ form.entidadFed }}</p>
+                        </div>
+                        <div class="nombreApellidos row col-12 mt-2">
+                            <p class="campo col-sm-6">Municipio:</p>
+                            {{ form.Municipio }}
+                        </div>
+                        <div class="telefonoDocente row col-12 mt-2">
+                            <p class="campo col-sm-6">Domicilio:</p>
+                            {{ form.Domicilio }}
+                        </div>
+                        <div class="cubiculoDocente row col-12 mt-2">
+                            <p class="campo col-sm-6">CP:</p>
+                            {{ form.CP }}
+                        </div>
+                        <div class="edificioDocente row col-12 mt-2">
+                            <p class="campo col-sm-6">Telefono:</p>
+                            {{ form.Telefono }}
+                        </div>
+                        <div class="nombreApellidos row col-12 mt-2">
+                            <p class="campo col-sm-6">Correo electronico:</p>
+                            {{ form.Correo }}
+                        </div>
+                        <div class="nombreApellidos row col-12 mt-2">
+                            <p class="campo col-sm-6">Contacto de confianza:</p>
+                            {{ form.CC }}
+                        </div>
+                        <div class="nombreApellidos row col-12 mt-2">
+                            <p class="campo col-sm-6">Contraseña:</p>
+                            {{ form.Contrasenia }}
+                        </div>
+                    </div>
+                </div>
+                <div class="botonCambiarPassword mt-2 text-center" style="width: 100%;">
+                    <button type="submit" class="btn btn-primary rounded-pill"
+                        style="background-color: #010780; color: white;">Guardar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+{% include "includes/footer.html" %}
+</div>
+
+{% endblock content %}
+
+<!-- Specific JS goes HERE -->
+{% block javascripts %}
+
+<script src="/static/assets/vendor/chart.js/dist/Chart.min.js"></script>
+<script src="/static/assets/vendor/chart.js/dist/Chart.extension.js"></script>
+
+{% endblock javascripts %}

@@ -1,0 +1,38 @@
+{% extends 'layouts/base.html' %}
+
+{% block title %} Grupos {% endblock title %}
+
+<!-- Specific CSS goes HERE -->
+{% block stylesheets %}
+<link rel="stylesheet" href="/static/assets/css/jda_docentes.css">
+{% endblock stylesheets %}
+
+{% block content %}
+
+<!-- Page content -->
+<div class="container-fluid">
+    <div class="container text-center">
+        <div class="d-flex justify-content-around flex-wrap">
+            {% for docente in docentes %}
+            {% if docente.user.tipouser == 'T_R' %}
+            <a href="{% url 'verTutor' id=docente.id %}">
+                <div class="text-center justify-content-start pr-4">
+                    <img src="/media/{{docente.user.fotoDePerfil}}" alt="Foto docente" id="circulo"><br>
+                    <span style="font-size: large; align-self: center; color: black;" class="pl-3">{{docente.user.nombre}} {{docente.user.aPaterno}} {{docente.user.aMaterno}}</span>
+                </div>
+            </a>
+            {% endif %}
+            {% endfor %}
+        </div>
+        {% include "includes/footer.html" %}
+    </div>
+
+    {% endblock content %}
+
+    <!-- Specific JS goes HERE -->
+    {% block javascripts %}
+
+    <script src="/static/assets/vendor/chart.js/dist/Chart.min.js"></script>
+    <script src="/static/assets/vendor/chart.js/dist/Chart.extension.js"></script>
+
+    {% endblock javascripts %}

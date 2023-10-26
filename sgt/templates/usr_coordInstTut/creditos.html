@@ -1,0 +1,75 @@
+{% extends 'layouts/base.html' %}
+
+{% block title %} Coordinador Institucional de Tutorias {% endblock title %}
+
+<!-- Specific CSS goes HERE -->
+{% block stylesheets %}
+<link rel="stylesheet" href="https://cdn.datatables.net/1.12.1/css/dataTables.bootstrap5.min.css" />
+<link rel="stylesheet" href="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.min.css">
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs5/dt-1.12.1/r-2.3.0/datatables.min.css" />
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+{% endblock stylesheets %}
+
+{% block content %}
+
+{% if mensaje %}
+  <div class="alert alert-success alert-dismissible fade show" role="alert">
+    <strong>!Correcto¡</strong> Los creditos fueron generados y mandados a los alumnos. 
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+{% endif %}
+
+<!-- Page content -->
+<div class="container-fluid">
+  <div class="shadow-lg p-3 mb-5 bg-body rounded" style="background-color: white;">
+  <div style="width: 50%;  margin-left: 25%; !important;">
+    <table id="" class="display table-xs justify-content-center align-items-center text-center" style="width: 100%;">
+      <thead>
+        <tr style="background-color: black; color: white;">
+          <th>Grupo</th>
+          <th>Credito complementario</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% if grupos %}
+            {% for a in grupos %}
+              <tr>
+                <td>{{a.grupo.nombre}}</td>
+                <td>
+                  <form method='POST'>
+                    {% csrf_token %}
+                    <input name="grupo" type="hidden" value="{{a.grupo.id}}"/>
+                    <button type="submit" class="border material-icons text-primary bg-white">
+                      system_update_alt
+                    </button>
+                  </form>
+                </td>
+              </tr>
+            {% endfor %}
+          {% else %}
+            <div class="justify-content-center align-items-center text-center">
+              <img src="/static/assets/img/icons/error.png" alt="error" style="width:100px;" class="mt-4"><br>
+              <span class="text-danger">No hay tutores en este momento</span>
+            </div>
+          {% endif %}
+      </tbody>
+    </table>
+  </div>
+</div>
+
+{% include "includes/footer.html" %}
+</div>
+{% endblock content %}
+
+<!-- Specific JS goes HERE -->
+{% block javascripts %}
+<script src="/static/assets/js/dataTables.js"></script>
+<script src="/static/assets/vendor/chart.js/dist/Chart.min.js"></script>
+<script src="/static/assets/vendor/chart.js/dist/Chart.extension.js"></script>
+<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+<script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
+<script type="text/javascript" src="https://cdn.datatables.net/v/bs5/dt-1.12.1/r-2.3.0/datatables.min.js"></script>
+
+{% endblock javascripts %}

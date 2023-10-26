@@ -1,0 +1,76 @@
+{% extends 'layouts/base.html' %}
+
+{% block title %} Coordinador Institucional de Tutorias {% endblock title %}
+
+<!-- Specific CSS goes HERE -->
+{% block stylesheets %}
+<link rel="stylesheet" href="https://cdn.datatables.net/1.12.1/css/dataTables.bootstrap5.min.css" />
+<link rel="stylesheet" href="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.min.css">
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs5/dt-1.12.1/r-2.3.0/datatables.min.css" />
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+{% endblock stylesheets %}
+
+{% block content %}
+
+<!-- Page content -->
+<div class="container-fluid">
+  <div class="shadow-lg p-3 mb-5 bg-body rounded" style="background-color: white;">
+    <div style="width: 100% !important;">
+    {% if reportes %}
+      <table class="display table-xs text-xs" style="width: 80%; margin-left:10%;">
+        <thead class="bg-dark text-light">
+          <tr>
+            <th class="text-center">Titulo</th>
+            <th class="text-center">Estado</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for a in reportes %}
+            <tr>
+              <td class="align-items-center justify-content-center text-center">Reporte - {{a.personal.user}}</td>
+              <td class="align-items-center justify-content-center text-center">
+                {% if a.estado == 'E' %}
+                  <a href="{{a.archivo.ruta}}">
+                    <span class="material-icons text-success" title="Descargar">file_download</span>
+                  </a>
+                {% elif a.estado == 'P' %}
+                  <span class="material-icons text-danger" title="Retrasado">pending_actions</span>
+                {% elif a.estado == 'R' %}
+                  <span class="material-icons text-warning" title="Pendiente">warning</span>
+                {% endif %}
+              </td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+      <div class="row justify-content-center align-items-center" style="width:90%; margin-left: 5%;">
+        <div class="col-xs-5 text-sm">
+          <a class="nav-link active active-pro mt-4 rounded-pill justify-content-center text-center" href="../../../media/temp/Reportes.zip"
+            style="background:#01075a">
+            <span style="color:white">Integrar todos y descargar</span>
+          </a>
+        </div>
+      </div>
+          {% else %}
+            <div class="justify-content-center align-items-center text-center">
+              <img src="/static/assets/img/icons/error.png" alt="error" style="width:100px;" class="mt-4"><br>
+              <span class="text-danger">No hay reportes</span>
+            </div>
+          {% endif %}
+    </div>
+  </div>
+
+  {% include "includes/footer.html" %}
+</div>
+{% endblock content %}
+
+<!-- Specific JS goes HERE -->
+{% block javascripts %}
+<script src="/static/assets/js/dataTables.js"></script>
+<script src="/static/assets/vendor/chart.js/dist/Chart.min.js"></script>
+<script src="/static/assets/vendor/chart.js/dist/Chart.extension.js"></script>
+<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+<script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
+<script type="text/javascript" src="https://cdn.datatables.net/v/bs5/dt-1.12.1/r-2.3.0/datatables.min.js"></script>
+
+{% endblock javascripts %}

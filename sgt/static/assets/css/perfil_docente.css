@@ -1,0 +1,32 @@
+.espacioFotoPerfil{
+    box-shadow: none;
+    width: 100%;
+}
+
+.fotoPerfil{
+    text-align: center;
+    border-radius: 50%;
+}
+
+.fotoPerfil img{
+    height: 30vh;
+    width: 30vh;
+    border-radius: 50%;
+}
+
+.datos{    
+    border: 2px solid gray;
+}
+
+.campo{
+    font-weight: 500;
+    margin-bottom: 0;
+}
+
+
+@media only screen and (max-width: 836px) and (min-width: 768px) {
+    
+.campoCorreoDocente{
+    font-size: 14px;
+}
+  }

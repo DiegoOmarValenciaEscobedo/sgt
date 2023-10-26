@@ -1,0 +1,74 @@
+{% extends 'layouts/base.html' %}
+
+{% block title %} Actividades {% endblock title %}
+
+<!-- Specific CSS goes HERE -->
+{% block stylesheets %}
+<link rel="stylesheet" href="/static/assets/css/tutor/tutor_verGrupo.css">
+<link rel="stylesheet" href="/static/assets/css/tutor/tutor_verActividades.css">
+{% endblock stylesheets %}
+
+{% block content %}
+
+<!-- Page content -->
+<div class="container-fluid">
+    <div class="container text-center">
+        <div class="row">
+            <div class="col-md-6 offset-md-3">
+                <div class="btn-group" aria-label="Basic example">
+                    <a href="{% url 'verGrupo' grupo %}"><button type="button" class="btn btn-primary rounded-pill"
+                            id="boton2">Ver grupo</button></a>
+                    <a href="{% url 'actividades' grupo %}"><button type="button" class="btn btn-primary rounded-pill"
+                            id="boton1">Actividades</button></a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container-fluid d-flex">
+
+        <!-- Contenido -->
+        <div class="contenidoHeader card ">
+            <div class="nombreActividad card-header py-2 px-0">
+                <div class="nombreActividadHeader text-center">
+                    <p class="m-0">Nueva actividad</p>
+                </div>
+            </div>
+            <div class="contenido card-body w-100">
+                <form method="POST" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <div class="Contenidos flex-column p-2 justify-content-around">
+                        <p><label class="m-0" for="{{ form.date.id_for_label }}">Fecha de cierre:</label>
+                            {{form.date}}
+                        </p>
+                        <p><label class="m-0" for="{{ form.tittle.id_for_label }}">Título:</label><br>
+                            {{form.tittle}}
+                        </p>
+                        <p><label class="m-0" for="{{ form.description.id_for_label }}">Descripción:</label><br>
+                            {{form.description}}
+                        </p>
+                        <p><label class="m-0" for="{{ form.fileLoad.id_for_label }}">Cargar actividad:</label><br>
+                            {{form.fileLoad}}
+                        </p>
+                        <div class="botones d-flex flex-wrap justify-content-center">
+                            <button type="submit" class="btn btn-secondary rounded-pill" id="btnagendar"
+                                data-bs-dismiss="modal" style="background-color: green; color: white;">Asignar</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <!-- Informacion de contacto -->
+    </div>
+
+
+    {% include "includes/footer.html" %}
+</div>
+
+{% endblock content %}
+
+<!-- Specific JS goes HERE -->
+{% block javascripts %}
+
+
+{% endblock javascripts %}

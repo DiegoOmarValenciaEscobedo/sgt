@@ -1,0 +1,139 @@
+{% extends 'layouts/base.html' %}
+
+{% block title %} Cargar Documentos {% endblock title %}
+
+<!-- Specific CSS goes HERE -->
+{% block stylesheets %}
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
+{% endblock stylesheets %}
+
+{% block content %}
+
+<!-- Page content -->
+<div class="d-flex justify-content-around py-5 flex-wrap">
+    {% if dirPAT != "" %}
+    <div name="PAT" class="col-sm-5 mt-4 ml-4 mr-4 text-center" style="border: solid 2px gray;">
+        <form action="">
+            <div class="mt--4">
+                <h3>Plan de Acción Tutorial</h3>
+            </div>
+            <div class="mb-4 mt-4">
+                <i class="fa-solid fa-file-circle-check" style="font-size: 100px"></i>
+            </div>
+            <div class="mb-4">
+                <a href="{{dirPAT}}" target="_blank" class="btn btn-primary rounded-pill"
+                    style="background-color: rgba(1,7,90,255);">
+                    Descargar
+                </a>
+                <a href="{% url 'admin_eliminarDocumento' 1 %}" class="btn btn-primary rounded-pill"
+                    style="background-color: rgba(124,48,48,255);">
+                    Eliminar
+                </a>
+            </div>
+        </form>
+    </div>
+    {% else %}
+    <div name="PAT" class="col-sm-5 mt-4 ml-4 mr-4 text-center" style="border: solid 2px gray;">
+        <form action="{% url 'admin_addDocumento' 1 %}" method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="mt--4">
+                <h3>Plan de Acción Tutorial</h3>
+            </div>
+            <div>
+                <i class="fa-solid fa-upload mb-4" style="font-size: 100px"></i>
+                {{ form }}
+                <p style="color: red;">PAT no esta cargado en el sistema</p>
+            </div>
+            <button type="submit" class="btn btn-primary rounded-pill" style="background-color: rgba(1,7,90,255);">Subir</button>
+        </form>
+    </div>
+    {% endif %}
+    {% if dirPIT != "" %}
+    <div name="PIT" class="col-sm-5 mt-4 ml-4 mr-4 text-center" style="border: solid 2px gray;">
+        <form action="">
+            <div class="mt--4">
+                <h3>Plan Interno de Tutorias</h3>
+            </div>
+            <div class="mb-4 mt-4">
+                <i class="fa-solid fa-file-circle-check" style="font-size: 100px"></i>
+            </div>
+            <div class="mb-4">
+                <a href="{{dirPIT}}" target="_blank" class="btn btn-primary rounded-pill"
+                    style="background-color: rgba(1,7,90,255);">
+                    Descargar
+                </a>
+                <a href="{% url 'admin_eliminarDocumento' 2 %}" class="btn btn-primary rounded-pill"
+                    style="background-color: rgba(124,48,48,255);">
+                    Eliminar
+                </a>
+            </div>
+        </form>
+    </div>
+    {% else %}
+    <div name="PIT" class="col-sm-5 mt-4 ml-4 mr-4 text-center" style="border: solid 2px gray;">
+        <form action="{% url 'admin_addDocumento' 2 %}" method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="mt--4">
+                <h3>Plan Interno de Tutorias</h3>
+            </div>
+            <div>
+                <i class="fa-solid fa-upload mb-4" style="font-size: 100px"></i>
+                {{ form }}
+                <p style="color: red;">PIT no esta cargado en el sistema</p>
+            </div>
+            <button type="submit" class="btn btn-primary rounded-pill" style="background-color: rgba(1,7,90,255);">Subir</button>
+        </form>
+    </div>
+    {% endif %}
+    {% if dirAP != "" %}
+    <div name="AP" class="col-sm-5 mt-4 ml-4 mr-4 text-center" style="border: solid 2px gray;">
+        <form action="">
+            <div class="mt--4">
+                <h3>Aviso de Privacidad</h3>
+            </div>
+            <div class="mb-4 mt-4">
+                <i class="fa-solid fa-file-circle-check" style="font-size: 100px"></i>
+            </div>
+            <div class="mb-4">
+                <a href="{{dirAP}}" target="_blank" class="btn btn-primary rounded-pill"
+                    style="background-color: rgba(1,7,90,255);">
+                    Descargar
+                </a>
+                <a href="{% url 'admin_eliminarDocumento' 3 %}" class="btn btn-primary rounded-pill"
+                    style="background-color: rgba(124,48,48,255);">
+                    Eliminar
+                </a>
+            </div>
+        </form>
+    </div>
+    {% else %}
+    <div name="AP" class="col-sm-5 mt-4 ml-4 mr-4 text-center" style="border: solid 2px gray;">
+        <form action="{% url 'admin_addDocumento' 3 %}" method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="mt--4">
+                <h3>Aviso de Privacidad</h3>
+            </div>
+            <div>
+                <i class="fa-solid fa-upload mb-4" style="font-size: 100px"></i>
+                {{ form }}
+                <p style="color: red;">Aviso de privacidad no esta cargado en el sistema</p>
+            </div>
+            <button type="submit" class="btn btn-primary rounded-pill" style="background-color: rgba(1,7,90,255);">Subir</button>
+        </form>
+    </div>
+    {% endif %}
+
+</div>
+
+{% include "includes/footer.html" %}
+
+
+{% endblock content %}
+
+<!-- Specific JS goes HERE -->
+{% block javascripts %}
+
+<script src="/static/assets/vendor/chart.js/dist/Chart.min.js"></script>
+<script src="/static/assets/vendor/chart.js/dist/Chart.extension.js"></script>
+
+{% endblock javascripts %}

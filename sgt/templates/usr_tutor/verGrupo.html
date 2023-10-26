@@ -1,0 +1,89 @@
+{% extends 'layouts/base.html' %}
+
+{% block title %} Grupos {% endblock title %}
+
+<!-- Specific CSS goes HERE -->
+{% block stylesheets %}
+<link rel="stylesheet" href="/static/assets/css/tutor/tutor_verGrupo.css">
+<link rel="stylesheet" href="https://cdn.datatables.net/1.12.1/css/dataTables.bootstrap5.min.css" />
+<link rel="stylesheet" href="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.min.css">
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs5/dt-1.12.1/r-2.3.0/datatables.min.css" />
+{% endblock stylesheets %}
+
+{% block content %}
+
+{% if mensaje %}
+  <div class="alert alert-success alert-dismissible fade show" role="alert">
+    <strong>!Correcto¡</strong> La lista de alumnos fue registrada exitosamente. 
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+{% endif %}
+
+<!-- Page content -->
+<div class="container-fluid">
+  <div class="container text-center">
+    <div class="row">
+      <div class="col-md-6 offset-md-3">
+        <div class="btn-group" aria-label="Basic example">
+          <a href="{% url 'verGrupo' grupo %}"><button type="button" class="btn btn-primary rounded-pill"
+              id="boton1">Ver grupo</button></a>
+          <a href="{% url 'actividades' grupo %}"><button type="button" class="btn btn-primary rounded-pill"
+              id="boton2">Actividades</button></a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="shadow-lg p-3 mb-5 bg-body rounded" style="background-color: white;">
+    <div style="width: 100% !important;"class="align-items-center justify-content-center">
+      {% if alumnos%}
+        <table id="" class="display dataTable dt-responsive table-hover dataGrupo" style="width: 100%;">
+          <thead>
+            <tr style="background-color: black; color: white;">
+              <th>Número de control</th>
+              <th>Nombre</th>
+              <th>Carrera</th>
+              <th>Estatus</th>
+            </tr>
+          </thead>
+          <tbody>
+        {%for a in alumnos%}
+            <tr>
+              <td id="url"><a href="{% url 'perfilTutorado_tutor' a.id %}">{{a.user.idTec}}</a></td>
+              <td><a href="{% url 'perfilTutorado_tutor' a.id %}">{{a.user.nombre}} {{a.user.aPaterno}} {{a.user.aMaterno}}</a></td>
+              {% if  a.carrera == none%}
+              <td >Sin asignar</td>
+              {% else %}
+                <td>{{a.carrera.nombre}}</td>
+              {% endif %}
+
+              {% if a.estatus == 'ACT' %}
+              <td >Activo</td>
+              {% else %}
+                <td>Inactivo</td>
+              {% endif %}
+            </tr>
+        {% endfor %}
+          </tbody>
+        </table>
+      {% else %}
+        <div class="justify-content-center align-items-center my-9 container text-center">
+          <span class="text-warning">El grupo aun no tiene alumnos inscritos</span><br><br><br>
+          <a href="{% url 'cargarGrupo_tutor' grupo %}" class="btn btn-warning rounded">Subir grupo </a>
+        </div>
+      {% endif %}
+    </div>
+  </div>
+
+  {% include "includes/footer.html" %}
+</div>
+
+{% endblock content %}
+
+<!-- Specific JS goes HERE -->
+{% block javascripts %}
+
+<script src="/static/assets/js/tutor/tutor_verGrupo.js"></script>
+
+{% endblock javascripts %}

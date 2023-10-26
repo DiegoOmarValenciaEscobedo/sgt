@@ -1,0 +1,92 @@
+{% extends 'layouts/base.html' %}
+
+{% block title %} Coordinador Institucional de Tutorias {% endblock title %}
+
+<!-- Specific CSS goes HERE -->
+{% block stylesheets %}
+<link rel="stylesheet" href="https://cdn.datatables.net/1.12.1/css/dataTables.bootstrap5.min.css" />
+<link rel="stylesheet" href="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.min.css">
+<link rel="stylesheet" href="/static/assets/css/tutor/tutor_verGrupo.css">
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs5/dt-1.12.1/r-2.3.0/datatables.min.css" />
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+{% endblock stylesheets %}
+
+{% block content %}
+
+<!-- Page content -->
+<div class="container-fluid">
+    <div class="shadow-lg p-3 mb-5 bg-body rounded" style="background-color: white;">
+        <div style="width: 100% !important;">
+            {% if eval %}
+                <table class="display table-xs" style="width: 100%;">
+                    <thead>
+                        <tr style="background-color: black; color: white;">
+                            <th class="text-center">Nombre</th>
+                            <th class="text-center">Acciones</th>
+                        </tr>
+                    </thead>
+                    {% for a in eval %}
+                        <tr id="url" >
+                            <td class="text-center">{{a.actividad.titulo}}</td>
+                            <td class="text-center">
+                                <a href="{% url 'borrar_eval' a.id %}">
+                                    <span class="material-icons text-danger" title="Eliminar">delete</span>
+                                </a>
+                                <a href="../../..{{a.archivo.ruta}}">
+                                    <span class="material-icons text-primary" title="Descargar">download</span>
+                                </a>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                    <tbody>
+                        <tfoot>
+                            <tr>
+                                <td class="text-center">Nueva Evaluacion</td>
+                                <td class="text-center">
+                                    <a onclick="nueva_eval();">
+                                        <span class="material-icons text-success" title="Crear nueva evaluacion">add_box</span>
+                                    </a>
+                                </td>
+                            </tr>
+                        </tfoot>
+                    </tbody>
+                </table>
+            {% else %}
+                <div class="justify-content-center align-items-center text-center">
+                    <img src="/static/assets/img/icons/error.png" alt="error" style="width:100px;" class="mt-4"><br>
+                    <span class="text-danger">No hay evaluaciones</span><br>
+                </div>
+                <div class="justify-content-center align-items-center text-center m-3">
+                    <a onclick="nueva_eval();" class="p-2">
+                        <span class="material-icons text-success" title="Crear nueva evaluacion">add_box</span>
+                    </a>
+                </div>
+            {% endif %}
+            <form class='border rounded border-light mt-5' method='POST' enctype='multipart/form-data' id='NED' style="display:none; width:70%; margin-left:15%">
+                {% csrf_token %}
+                <div id='nva_eval' class='mx-3'>
+                    {{form}}
+                    <div id='nva_eval' class='mx-2 text-center'>
+                        <button type="submit" class="btn btn-success my-3">Crear</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    {% include "includes/footer.html" %}
+</div>
+
+{% endblock content %}
+
+<!-- Specific JS goes HERE -->
+{% block javascripts %}
+<script src="/static/assets/js/dataTables.js"></script>
+<script src="/static/assets/vendor/chart.js/dist/Chart.min.js"></script>
+<script src="/static/assets/vendor/chart.js/dist/Chart.extension.js"></script>
+<script src="/static/assets/js/CIT/NvaEvDiag.js"></script>
+<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+<script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
+<script type="text/javascript" src="https://cdn.datatables.net/v/bs5/dt-1.12.1/r-2.3.0/datatables.min.js"></script>
+
+{% endblock javascripts %}

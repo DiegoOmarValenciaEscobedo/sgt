@@ -1,0 +1,121 @@
+{% extends 'layouts/base.html' %}
+
+{% block title %} Actividad {% endblock title %}
+
+<!-- Specific CSS goes HERE -->
+{% block stylesheets %}
+<link rel="stylesheet" type="text/css" href="/static/assets/css/tutorado/ver_actividad.css">
+{% endblock stylesheets %}
+
+{% block content %}
+
+<!-- Page content -->
+<div class="container-fluid">
+    <div class="row border border-light rounded mt-5">
+        <span style="color:grey" class="mt--4">Descripcion de Actividad</span>
+        <div class="container-fluid mt-2">
+            <div class="row">
+                <div id="tit" class="col-l">
+                    <h2>Titulo:</h2>
+                </div>
+                <div id="tit1" class="col">
+                    <p>{{actividad.actividad.titulo}}</p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-l">
+                    <h3>Fecha de inicio:</h3>
+                </div>
+                <div class="col">
+                    <p>{{actividad.actividad.fechaDeAsignacion}}</p>
+                </div>
+                <div class="col-l">
+                    <h3>Fecha de cierre:</h3>
+                </div>
+                <div class="col">
+                    <p>{{actividad.actividad.fechaDeCierre}}</p>
+                </div>
+            </div>
+            <div class="row">
+                <div id="desc" class="col-l">
+                    <h3>Descripcion:</h3>
+                </div>
+                <div class="col">
+                    <p>{{actividad.actividad.descripcion}}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row border border-light rounded mt-5">
+        <span style="color:grey" class="mt--4">Descargar Actividad</span>
+        <div id="pill"
+            class="container-fluid mt-2 badge badge-pill badge-secondary justify-content-center align-items-center">
+            <div class="row justify-content-center align-items-center">
+                <div class="col">
+                    <h4>{{actividad.actividad.titulo}}</h4>
+                </div>
+                <div class="col">
+                    <a href="{{actividad.archivo.ruta}}" target="_blank">
+                        <button type="button" class="btn btn-primary rounded-pill" style="background-color: blue">Descargar</button>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    {% if estatus.estado == 'E' %}
+    <div class="row border border-light rounded mt-5">
+        <span style="color:green" class="mt--4">Actividad Enviada</span>
+        <div id="pill"
+            class="container-fluid mt-2 badge badge-pill badge-secondary justify-content-center align-items-center">
+
+                <div class="row justify-content-center align-items-center">
+                    <div class="col">
+                        <h4>Tarea enviada</h4>
+                    </div>
+                    <div class="col">
+                        <a href="{{entrega.archivo.ruta}}" target="_blank">
+                            <button type="button" class="btn btn-primary rounded-pill"
+                                    style="background-color: blue;">Descargar</button>
+                        </a>
+                    </div>
+                </div>
+
+        </div>
+    </div>
+
+    {% else %}
+    <div class="row border border-light rounded mt-5">
+        <span style="color:grey" class="mt--4">Cargar Actividad</span>
+        <div id="pill"
+            class="container-fluid mt-2 badge badge-pill badge-secondary justify-content-center align-items-center">
+            <form method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                <div class="row justify-content-center align-items-center">
+                    <div class="col">
+                        {{form.fileLoad}}
+                    </div>
+                    <div class="col">
+                        <button type="submit" class="btn btn-primary rounded-pill"
+                                style="background-color: blue;">Enviar</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    {% endif %}
+
+    {% include "includes/footer.html" %}
+</div>
+
+{% endblock content %}
+
+<!-- Specific JS goes HERE -->
+{% block javascripts %}
+
+<script src="/static/assets/vendor/chart.js/dist/Chart.min.js"></script>
+<script src="/static/assets/vendor/chart.js/dist/Chart.extension.js"></script>
+
+{% endblock javascripts %}

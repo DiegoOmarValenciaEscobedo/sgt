@@ -1,0 +1,248 @@
+{% extends 'layouts/base.html' %}
+
+{% block title %} Coordinador de Tutorias del Dpto. Academico {% endblock title %}
+
+<!-- Specific CSS goes HERE -->
+{% block stylesheets %}
+<link rel="stylesheet" href="/static/assets/css/perfil_docente.css">
+{% endblock stylesheets %}
+
+{% block content %}
+
+{% if mensaje %}
+<div class="alert alert-success alert-dismissible fade show" role="alert">
+    <strong>!Correcto¡</strong> Se notificó al psicólogo de la cita.
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+    </button>
+</div>
+{% endif %}
+
+<!-- Page content -->
+<div class="container-fluid">
+    <div class="perfil row mt-2">
+        <div class="espacioFotoPerfil card bg-transparent col-12 col-md-5" style="height: 100%;">
+            <div class="card-body">
+                <div class="fotoPerfil">
+                    <img src="{{alumno.user.fotoDePerfil.url}}" alt="FotoPerfil" class="image-fluid">
+                </div>
+            </div>
+        </div>
+        <div class="infoPerfil d-flex flex-column justify-content-center col-12 col-md-7 mt-1">
+            <div class="espacioDatosGenerales">
+                <div class="titulo">
+                    <h3>Datos generales</h3>
+                </div>
+                <div class="datos p-2">
+                    <div class="nombreAlumno row col-12">
+                        <p class="campo col-sm-6">Nombre:</p>
+                        <p class="camponombreAlumno col-sm-6">{{alumno.user.nombre}}</p>
+                    </div>
+                    <div class="nombreApellidos row col-12">
+                        <p class="campo col-sm-6">Apellido:</p>
+                        <p class="nombreApellidos col-sm-6">{{alumno.user.aPaterno}} {{alumno.user.aMaterno}}</p>
+                    </div>
+                    {% if alumno.fechaDeNacimiento %}
+                    <div class="campoCum row col-12">
+                        <p class="campo col-sm-6">Fecha de nacimiento:</p>
+                        <p class="campoCum col-sm-6">{{alumno.fechaDeNacimiento}}</p>
+                    </div>
+                    {% else %}
+                    <div class="campoCum row col-12">
+                        <p class="campo col-sm-6">Fecha de nacimiento:</p>
+                        <p class="campoCum col-sm-6 text-danger">No proporcionada</p>
+                    </div>
+                    {% endif %}
+                    {% if alumno.user.genero %}
+                    <div class="generoAlumno row col-12">
+                        <p class="campo col-sm-6">Género:</p>
+                        {% if alumno.user.genero == 'F' %}
+                        <p class="campogeneroAlumno col-sm-6">Femenino</p>
+                        {% elif alumno.user.genero == 'M'%}
+                        <p class="campogeneroAlumno col-sm-6">Masculino</p>
+                        {% else %}
+                        <p class="campogeneroAlumno col-sm-6">No binario</p>
+                        {% endif %}
+                    </div>
+                    {% else %}
+                    <div class="generoAlumno row col-12">
+                        <p class="campo col-sm-6">Género:</p>
+                        <p class="campogeneroAlumno col-sm-6 text-danger">No proporcionado</p>
+                    </div>
+                    {% endif %}
+                    {% if alumno.estadoCivil %}
+                    <div class="estadoCivil row col-12">
+                        <p class="campo col-sm-6">Estado Civil:</p>
+                        {% if alumno.estadoCivil == 'SO' %}
+                        <p class="campoestadoCivil col-sm-6">Soltero</p>
+                        {% else %}
+                        <p class="campoestadoCivil col-sm-6">Casado</p>
+                        {% endif %}
+                    </div>
+                    {% else %}
+                    <div class="estadoCivil row col-12">
+                        <p class="campo col-sm-6">Estado Civil:</p>
+                        <p class="campoestadoCivil col-sm-6 text-danger">No proporcionado</p>
+                    </div>
+                    {% endif %}
+
+                    <div class="numSS row col-12">
+                        <p class="campo col-sm-6">Número de servicio social:</p>
+                        {% if alumno.nss %}
+                        <p class="camponumSS col-sm-6">{{alumno.nss}}</p>
+                        {% else %}
+                        <p class="camponumSS col-sm-6 text-danger">No proporcionado</p>
+                        {% endif %}
+                    </div>
+
+                    <div class="infoMedica row col-12">
+                        <p class="campo col-sm-6">Información adicional/medica:</p>
+                        {% if alumno.observaciones %}
+                        <p class="campoinfoMedica col-sm-6">{{alumno.observaciones}}</p>
+                        {% else %}
+                        <p class="campoinfoMedica col-sm-6 text-danger">No proporcionado</p>
+                        {% endif %}
+                    </div>
+
+                </div>
+            </div>
+            <div class="espacioDatosEscolares mt-2">
+                <div class="titulo">
+                    <h3>Datos escolares</h3>
+                </div>
+                <div class="datos p-2">
+                    <div class="numeroDeControl row col-12">
+                        <p class="campo col-sm-6">Número de control:</p>
+                        <p class="numeroDeControl col-sm-6">{{alumno.user.idTec}}</p>
+                    </div>
+                    <div class="carrera row col-12">
+                        <p class="campo col-sm-6">Carrera:</p>
+                        <p class="carrera col-sm-6">{{alumno.carrera}}</p>
+                    </div>
+                    <div class="semestre row col-12">
+                        <p class="campo col-sm-6">Semestre:</p>
+                        {% if alumno.semestre %}
+                        <p class="semestre col-sm-6">{{alumno.semestre}}</p>
+                        {% else %}
+                        <p class="semestre col-sm-6 text-danger">No proporcionado</p>
+                        {% endif %}
+                    </div>
+                    <div class="estatus row col-12">
+                        <p class="campo col-sm-6">Estatus:</p>
+                        {% if alumno.estatus == 'ACT' %}
+                        <p class="estatus col-sm-6">Activo</p>
+                        {% else %}
+                        <p class="estatus col-sm-6">Inactivo</p>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+            <div class="espacioDatosDeContacto mt-2">
+                <div class="titulo">
+                    <h3>Datos de contacto</h3>
+                </div>
+                <div class="datos p-2">
+                    <div class="estado row col-12">
+                        <p class="campo col-sm-6">Estado:</p>
+                        {% if entidadFed %}
+                        <p class="estado col-sm-6">{{entidadFed}}</p>
+                        {% else %}
+                        <p class="estado col-sm-6 text-danger">No proporcionado</p>
+                        {% endif %}
+                    </div>
+                    <div class="municipio row col-12">
+                        <p class="campo col-sm-6">Municipio:</p>
+                        {% if alumno.municipio %}
+                        <p class="municipio col-sm-6">{{alumno.municipio}}</p>
+                        {% else %}
+                        <p class="municipio col-sm-6 text-danger">No proporcionado</p>
+                        {% endif %}
+                    </div>
+                    <div class="domicilio row col-12">
+                        <p class="campo col-sm-6">Domicilio:</p>
+                        {% if alumno.domicilio %}
+                        <p class="domicilio col-sm-6">{{alumno.domicilio}}</p>
+                        {% else %}
+                        <p class="domicilio col-sm-6 text-danger">No proporcionado</p>
+                        {% endif %}
+                    </div>
+                    <div class="cp row col-12">
+                        <p class="campo col-sm-6">Codigo postal:</p>
+                        {% if alumno.cp %}
+                        <p class="cp col-sm-6">{{alumno.cp}}</p>
+                        {% else %}
+                        <p class="cp col-sm-6 text-danger">No proporcionado</p>
+                        {% endif %}
+                    </div>
+                    <div class="telefono row col-12">
+                        <p class="campo col-sm-6">Telefono:</p>
+                        {% if alumno.user.telefono %}
+                        <p class="telefono col-sm-6">{{alumno.user.telefono}}</p>
+                        {% else %}
+                        <p class="telefono col-sm-6 text-danger">No proporcionado</p>
+                        {% endif %}
+                    </div>
+                    <div class="email row col-12">
+                        <p class="campo col-sm-6">Email:</p>
+                        <p class="email col-sm-6">{{alumno.user.email}}</p>
+                    </div>
+                    <div class="contactoConfianza row col-12">
+                        <p class="campo col-sm-6">Contacto de confianza:</p>
+                        {% if alumno.contactConfianza %}
+                        <p class="contactoConfianza col-sm-6">{{alumno.contactConfianza}}</p>
+                        {% else %}
+                        <p class="contactoConfianza col-sm-6 text-danger">No proporcionado</p>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+            <!--Cita psicologica-->
+            <div class="row mb-3 mx-2 justify-content-center" id="psi">
+                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal"
+                    id="btnmodal" style="margin-top: 1rem; background-color: blue;">
+                    Agendar cita psicológica
+                </button>
+                <div class="modal fade" id="exampleModal" tabindex="1" aria-labelledby="exampleModalLabel"
+                    aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h1 class="modal-title fs-5" id="exampleModalLabel">Agendar cita</h1>
+                            </div>
+                            <div class="modal-body justify-content-center">
+                                <form action="#" method="POST">
+                                    {% csrf_token %}
+                                    <div class="Citas d-flex flex-column">
+                                        <p><label
+                                                style="font-weight: 600; font-size: 2vh; color: black;">Motivo:</label>
+                                            {{form.motive}}
+                                        </p>
+                                        <p><label
+                                                style="font-weight: 600; font-size: 2vh; color: black;">Descripción:</label><br>
+                                            {{form.description}}
+                                        </p>
+                                        <button type="submit" class="btn btn-secondary " id="btnagendar"
+                                            data-bs-dismiss="modal"
+                                            style="background-color: darkblue; color: white;">Agendar</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+{% include "includes/footer.html" %}
+</div>
+
+{% endblock content %}
+
+<!-- Specific JS goes HERE -->
+{% block javascripts %}
+<script src="/static/assets/js/tutor/tutor_perfilTutorado.js"></script>
+
+{% endblock javascripts %}

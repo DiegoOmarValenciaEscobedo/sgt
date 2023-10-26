@@ -1,0 +1,126 @@
+{% extends 'layouts/base.html' %}
+
+{% block title %} Grupos {% endblock title %}
+
+<!-- Specific CSS goes HERE -->
+{% block stylesheets %}
+<link rel="stylesheet" href="/static/assets/css/tutor_verGrupo.css">
+{% endblock stylesheets %}
+
+{% block content %}
+
+<!-- Page content -->
+<div class="container-fluid">
+    <div class="btn-group d-flex justify-content-center" role="group" aria-label="Basic example">
+        <a href="{% url 'verGrupo' %}"><button type="button" class="btn btn-primary rounded-pill" id="boton1">Ver
+                grupo</button></a>
+        <a href="{% url 'actividades' %}"><button type="button" class="btn btn-primary rounded-pill"
+                id="boton2">Actividades</button></a>
+    </div>
+    <div class="row">
+        <div class="col">
+            <div class="card shadow">
+
+                <div class="card-body container">
+                    <div class="card-body row align-items-center justify-content-center">
+                        <div class="col-xs-4 justify-content-center align-items-center text-center">
+                            <img src="/static/assets/img/brand/profile-pic.png" alt="fotito"
+                                class="img-thumbnail ml-md--7 p-3 mt--4">
+                        </div>
+
+                        <div class="col-xs-7">
+                            <br>
+                            <span style="color:grey" class="mt--4">Datos generales</span>
+                            <div class="row border border-light rounded mb-3">
+                                <ul class="list-group list-group-flush">
+                                    <li class="list-group-item">Nombre: Filifencio Juarez Rojas</li>
+                                    <li class="list-group-item">Fecha de nacimiento: 23/11/2001</li>
+                                    <li class="list-group-item">Genero: Masculino</li>
+                                    <li class="list-group-item">Estado civil: Soltero</li>
+                                    <li class="list-group-item">Numero de servicio social: 96180112546</li>
+                                    <li class="list-group-item">Discapacidades: Ninguna</li>
+                                    <li class="list-group-item">Informacion adicional/medica: Sufre de asma</li>
+                                </ul>
+                            </div>
+                            <br>
+                            <span style="color:grey" class="mt--4">Datos escolares</span>
+                            <div class="row border border-light rounded mb-3">
+                                <ul class="list-group list-group-flush">
+                                    <li class="list-group-item">Numero de control: 19121025</li>
+                                    <li class="list-group-item">Carrera: Sistemas Computacionales</li>
+                                    <li class="list-group-item">Semestre: 1</li>
+                                    <li class="list-group-item">Estatus: Cursando</li>
+                                </ul>
+                            </div>
+                            <br>
+                            <span style="color:grey" class="mt--4">Datos de contacto</span>
+                            <div class="row border border-light rounded mb-3">
+                                <ul class="list-group list-group-flush ml--0">
+                                    <li class="list-group-item">Estado: Michoacan</li>
+                                    <li class="list-group-item">Municipio: Morelia</li>
+                                    <li class="list-group-item">Domicilio: Pascual cortes 36, Jesus Romero Flores</li>
+                                    <li class="list-group-item">Codigo postal: 58128</li>
+                                    <li class="list-group-item">Telefono: 4435501265</li>
+                                    <li class="list-group-item">Correo electronico: l19121065@morelia.tecnm.mx</li>
+                                    <li class="list-group-item">Contacto de confianza: Ana karen | 4436624587</li>
+                                </ul>
+                            </div>
+                            <span style="color:grey" class="">Psicología</span>
+                            <div class="row border border-light rounded justify-content-around" id="psi">
+                                <ul class="list-group list-group-flush">
+                                    <li class="list-group-item">Agendar Cita: </li>
+                                </ul>
+                                <button type="button" class="btn btn-primary" data-bs-toggle="modal"
+                                    data-bs-target="#exampleModal" id="btnmodal">
+                                    Agendar
+                                </button>
+                                <div class="modal fade" id="exampleModal" tabindex="1"
+                                    aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog modal-dialog-centered">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h1 class="modal-title fs-5" id="exampleModalLabel">Agendar cita</h1>
+                                            </div>
+                                            <div class="modal-body justify-content-center">
+                                                <form action="#" method="POST">
+                                                    {% csrf_token %}
+                                                    <div class="Citas d-flex flex-column">
+                                                        <p><label for="{{ form.motive.id_for_label }}"
+                                                                style="font-weight: 600; font-size: 2vh; color: black;">Motivo:</label>
+                                                            {{form.motive}}
+                                                        </p>
+                                                        <p><label for="{{ form.description.id_for_label }}"
+                                                                style="font-weight: 600; font-size: 2vh; color: black;">Descripción:</label><br>
+                                                            {{form.description}}
+                                                        </p>
+                                                        <button type="submit" class="btn btn-secondary " id="btnagendar"
+                                                            data-bs-dismiss="modal"
+                                                            style="background-color: darkblue; color: white;">Agendar</button>
+                                                    </div>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+
+
+    {% include "includes/footer.html" %}
+</div>
+
+{% endblock content %}
+
+<!-- Specific JS goes HERE -->
+{% block javascripts %}
+
+<script src="/static/assets/js/tutor/tutor_perfilTutorado.js"></script>
+
+{% endblock javascripts %}

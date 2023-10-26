@@ -1,0 +1,62 @@
+{% extends 'layouts/base.html' %}
+
+{% block title %} Generar nuevo grupo de tutorías{% endblock title %}
+
+<!-- Specific CSS goes HERE -->
+{% block stylesheets %}
+
+{% endblock stylesheets %}
+
+{% block content %}
+
+<!-- Page content -->
+<div class="container-fluid">
+    <div class="crearNuevoGrupo d-flex justify-content-center">
+        <div class="d-flex flex-column mt-2">
+            <h3>Lista de periodos</h3>
+            <table id="tablaDeRegistros" class="datatable table table-striped table-bordered" style="width:100%">
+                <thead class="table-dark">
+                    <tr>
+                        <th>Fecha de inicio</th>
+                        <th>Fecha de fin</th>
+                        <th>Tipo de periodo</th>
+                    </tr>
+                </thead>
+                <tbody id="tableBody">
+                    {% for periodo in periodos %}
+                    <tr>
+                        <td>{{periodo.fechaInicio}}</td>
+                        <td>{{periodo.fechaTermina}}</td>
+                        {% if periodo.tipoPeriodo == '1' %}
+                            <td>Invierno</td>
+                        {% elif periodo.tipoPeriodo == '2' %}
+                            <td>Otoño</td>
+                        {% else %}
+                            <td>Verano</td>
+                        {% endif %}
+                    </tr>
+                    {% endfor %}
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <th>Fecha de inicio</th>
+                        <th>Fecha de fin</th>
+                        <th>Tipo de periodo</th>
+                    </tr>
+                </tfoot>
+            </table>
+        </div>
+    </div>
+</div>
+
+{% include "includes/footer.html" %}
+</div>
+
+{% endblock content %}
+
+<!-- Specific JS goes HERE -->
+{% block javascripts %}
+<script src="/static/assets/vendor/chart.js/dist/Chart.min.js"></script>
+<script src="/static/assets/vendor/chart.js/dist/Chart.extension.js"></script>
+
+{% endblock javascripts %}

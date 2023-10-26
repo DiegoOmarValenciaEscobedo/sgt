@@ -1,0 +1,141 @@
+{% extends 'layouts/base.html' %}
+
+{% block title %} Perfil {% endblock title %}
+
+<!-- Specific CSS goes HERE -->
+{% block stylesheets %}
+<link rel="stylesheet" href="/static/assets/css/perfil_docente.css">
+{% endblock stylesheets %}
+
+{% block content %}
+
+<!-- Page content -->
+<div class="container-fluid">
+    <div class="perfil row mt-2">
+        <div class="espacioFotoPerfil card bg-transparent col-12 col-md-5" style="height: 100%;">
+            <div class="card-body">
+                <div class="fotoPerfil">
+                    <img src="{{request.user.fotoDePerfil.url}}" alt="FotoPerfil" class="image-fluid">
+                </div>
+            </div>
+            <div class="card-footer bg-transparent p-0" style="border: none;">
+                <div class="botonCambiarPassword mt-2 text-center" style="width: 100%;">
+                    <button type="button" class="btn btn-primary rounded-pill"
+                        onclick="location.href='/changeProfilePicture/'" style="background-color: #010780;">Cambiar foto de perfil</button>
+                </div>
+                <div class="botonCambiarPassword mt-2 text-center" style="width: 100%;">
+                    <button type="button" class="btn btn-primary rounded-pill"
+                        onclick="location.href='/changePassword/'" style="background-color: #010780;">Cambiar contraseña</button>
+                </div>
+            </div>
+        </div>
+        <div class="infoPerfil d-flex flex-column justify-content-center col-12 col-md-7 mt-1">
+            <div class="espacioDatosGenerales">
+                <div class="titulo">
+                    <h3>Datos generales</h3>
+                </div>
+                <div class="datos p-2">
+                    <div class="nombreDocente row col-12">
+                        <p class="campo col-sm-6">Nombre:</p>
+                        <p class="campoNombreDocente col-sm-6">{{request.user.nombre}}</p>
+                    </div>
+                    <div class="nombreApellidos row col-12">
+                        <p class="campo col-sm-6">Apellido:</p>
+                        <p class="nombreApellidos col-sm-6">{{request.user.aPaterno}} {{request.user.aMaterno}}</p>
+                    </div>
+                    <div class="nombreCum row col-12">
+                        <p class="campo col-sm-6">Fecha de nacimiento:</p>
+                        <p class="nombreCum col-sm-6">{{request.user.tutorado.fechaDeNacimiento}}</p>
+                    </div>
+                    <div class="generoDocente row col-12">
+                        <p class="campo col-sm-6">Género:</p>
+                        <p class="campoGeneroDocente col-sm-6">{{genero}}</p>
+                    </div>
+                    <div class="estadoCivil row col-12">
+                        <p class="campo col-sm-6">Estado Civil:</p>
+                        <p class="estadoCivil col-sm-6">{{estadoCivil}}</p>
+                    </div>
+                    <div class="nss row col-12">
+                        <p class="campo col-sm-6">Numero de servicio social:</p>
+                        <p class="nss col-sm-6">{{request.user.tutorado.nss}}</p>
+                    </div>
+                    <div class="infAdicional row col-12">
+                        <p class="campo col-sm-6">Información adicional/medica:</p>
+                        <p class="infAdicional col-sm-6">{{request.user.tutorado.observaciones}}</p>
+                    </div>
+                </div>
+            </div>
+            <div class="espacioDatosEscolares mt-2">
+                <div class="titulo">
+                    <h3>Datos escolares</h3>
+                </div>
+                <div class="datos p-2">
+                    <div class="numeroDeControl row col-12">
+                        <p class="campo col-sm-6">Número de control:</p>
+                        <p class="numeroDeControl col-sm-6">{{request.user.idTec}}</p>
+                    </div>
+                    <div class="carrera row col-12">
+                        <p class="campo col-sm-6">Carrera:</p>
+                        <p class="carrera col-sm-6">{{carrera}}</p>
+                    </div>
+                    <div class="semestre row col-12">
+                        <p class="campo col-sm-6">Semestre:</p>
+                        <p class="semestre col-sm-6">{{request.user.tutorado.semestre}}</p>
+                    </div>
+                    <div class="estatus row col-12">
+                        <p class="campo col-sm-6">Estatus:</p>
+                        <p class="estatus col-sm-6">{{estatus}}</p>
+                    </div>
+                </div>
+            </div>
+            <div class="espacioDatosDeContacto mt-2">
+                <div class="titulo">
+                    <h3>Datos de contacto</h3>
+                </div>
+                <div class="datos p-2">
+                    <div class="estado row col-12">
+                        <p class="campo col-sm-6">Estado:</p>
+                        <p class="estado col-sm-6">{{entidadFed}}</p>
+                    </div>
+                    <div class="municipio row col-12">
+                        <p class="campo col-sm-6">Municipio:</p>
+                        <p class="municipio col-sm-6">{{request.user.tutorado.municipio}}</p>
+                    </div>
+                    <div class="domicilio row col-12">
+                        <p class="campo col-sm-6">Domicilio:</p>
+                        <p class="domicilio col-sm-6">{{request.user.tutorado.domicilio}}</p>
+                    </div>
+                    <div class="cp row col-12">
+                        <p class="campo col-sm-6">Codigo postal:</p>
+                        <p class="cp col-sm-6">{{request.user.tutorado.cp}}</p>
+                    </div>
+                    <div class="telefono row col-12">
+                        <p class="campo col-sm-6">Telefono:</p>
+                        <p class="telefono col-sm-6">{{request.user.telefono}}</p>
+                    </div>
+                    <div class="email row col-12">
+                        <p class="campo col-sm-6">Email:</p>
+                        <p class="email col-sm-6">{{request.user.email}}</p>
+                    </div>
+                    <div class="contactoConfianza row col-12">
+                        <p class="campo col-sm-6">Contacto de confianza:</p>
+                        <p class="contactoConfianza col-sm-6">{{request.user.tutorado.contactConfianza}}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% include "includes/footer.html" %}
+</div>
+
+{% endblock content %}
+
+<!-- Specific JS goes HERE -->
+{% block javascripts %}
+
+<script src="/static/assets/vendor/chart.js/dist/Chart.min.js"></script>
+<script src="/static/assets/vendor/chart.js/dist/Chart.extension.js"></script>
+
+{% endblock javascripts %}

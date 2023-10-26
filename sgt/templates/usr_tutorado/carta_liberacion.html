@@ -1,0 +1,43 @@
+{% extends 'layouts/base.html' %}
+
+{% block title %} Carta de liberacion {% endblock title %}
+
+<!-- Specific CSS goes HERE -->
+{% block stylesheets %}
+<link rel="stylesheet" type="text/css" href="/static/assets/css/tutorado/ver_actividad.css">
+{% endblock stylesheets %}
+
+{% block content %}
+
+<!-- Page content -->
+<div class="container-fluid">
+    <div class="row border border-light rounded mt-5">
+        <div id="pill" class="container-fluid mt-2 badge badge-pill badge-secondary justify-content-center align-items-center">
+            <div class="row justify-content-center align-items-center">
+                <div class="col">
+                    <h3>{{request.user.idTec}}</h3>
+                </div>
+                <div class="col">
+                    <h3>{{request.user.nombre}} {{request.user.aPaterno}} {{request.user.aMaterno}}</h3>
+                </div>
+                <div class="col">
+                    <a href="{{credito.ruta.ruta}}" target="_blank">
+                        <button type="button" class="btn btn-primary rounded-pill" style="background-color: blue;">Descargar</button>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    {% include "includes/footer.html" %}
+</div>
+
+{% endblock content %}
+
+<!-- Specific JS goes HERE -->
+{% block javascripts %}
+
+<script src="/static/assets/vendor/chart.js/dist/Chart.min.js"></script>
+<script src="/static/assets/vendor/chart.js/dist/Chart.extension.js"></script>
+
+{% endblock javascripts %}

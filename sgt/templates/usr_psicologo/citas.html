@@ -1,0 +1,273 @@
+{% extends 'layouts/base.html' %}
+
+{% block title %} Dashboard {% endblock title %}
+
+<!-- Specific CSS goes HERE -->
+{% block stylesheets %}
+<!-- Link Swiper's CSS -->
+<link rel="stylesheet" href="/static/assets/css/psicologo/citasPsicologo.css">
+<link rel="stylesheet" href="https://cdn.datatables.net/1.12.1/css/dataTables.bootstrap5.min.css" />
+<link rel="stylesheet" href="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.min.css">
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs5/dt-1.12.1/r-2.3.0/datatables.min.css" />
+{% endblock stylesheets %}
+
+{% block content %}
+
+<!-- Page content -->
+<div class="container-fluid" style="height: 100%;">
+  <div class="d-flex flex-column p-3">
+    <!-- <div class="citas d-flex justify-content-around flex-wrap">       -->
+    <table class="display dataTable dt-responsive table-hover dataGrupo" style="width: 100%;">
+      <thead>
+        <tr style="background-color: black; color: white;">
+          <th>Datos solicitante</th>
+          <th>Motivos de la solicitud</th>
+          <th>Agendar una cita</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for citaNueva in citasNuevas %}
+        <tr>
+          <div class="citaNueva d-flex justify-content-around flex-wrap">
+            <td style="width: 25%;">
+              <div class="card shadow p-0 m-1">
+                <div class="card-header p-2" style="background-color: rgb(172, 168, 168);">
+                  <h3 class="mb-0 text-center">Número de control:</h3>
+                  <h2 class="mb-0 text-center">{{citaNueva.tutorado.user.idTec}}</h2>
+                </div>
+                <div class="card-body p-2">
+                  <div class="datosSolicitante mb-1 ">
+                    <div class="carreraSolicitante">
+                      <div class="campoCarrera">
+                        <p class="campoCitaSolicitante mb-0" style="font-weight: 500;">Carrera:</p>
+                      </div>
+                      <div class="campoCarreraSolicitante" style="font-weight: 700; border-radius: 5px;">
+                        <p class="mb-0 campo">{{citaNueva.tutorado.carrera.nombre}}</p>
+                      </div>
+                    </div>
+                    <div class="campusSolicitante">
+                      <div class="campoCampus">
+                        <p class="campoCampusSolicitante mb-0" style="font-weight: 500;">Campus:
+                        </p>
+                      </div>
+                      <div class="campoCampusSolicitante" style="font-weight: 700; border-radius: 5px;">
+                        <p class="mb-0 campo">{{citaNueva.tutorado.carrera.tecnologico.nombre}}</p>
+                      </div>
+                    </div>
+                    <div class="fechaSolicitudSolicitante">
+                      <div class="campoFechaSolicitud">
+                        <p class="campoCitaSolicitante mb-0" style="font-weight: 500;">Fecha:
+                        </p>
+                      </div>
+                      <div class="campoFechaSolicitante" style="font-weight: 700; border-radius: 5px;">
+                        <p class="mb-0 campo">{{citaNueva.fechaDeCreacion}}</p>
+                      </div>
+                    </div>
+                    <div class="otrosSolicitante d-flex justify-content-between">
+                      <div class="edadSolicitante mr-2">
+                        <div class="campoEdad">
+                          <p class="campoCitaSolicitante mb-0" style="font-weight: 500;">Fecha de nacimiento:</p>
+                        </div>
+                        <div class="campoEdadSolicitante" style="font-weight: 700; border-radius: 5px;">
+                          <p class="mb-0 text-center campo">{{citaNueva.tutorado.fechaDeNacimiento}}</p>
+                        </div>
+                      </div>
+                      <div class="semestreSolicitante">
+                        <div class="campoSemestre">
+                          <p class="campoCitaSolicitante mb-0" style="font-weight: 500;">Semestre:</p>
+                        </div>
+                        <div class="campoSemestreSolicitante" style="font-weight: 700; border-radius: 5px;">
+                          <p class="mb-0 text-center campo">{{citaNueva.tutorado.semestre}}</p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </td>
+            <td>
+              <div class="card shadow p-0 m-1">
+                <div class="card-header p-2" style="background-color: rgb(172, 168, 168);">
+                  <h2 class="mb-0 text-center">Información</h2>
+                </div>
+                <div class="card-body p-2">
+                  <div class="verInfoCita">
+                    <div class="datosSolicitanteCita m-1">
+                      <div class="motivosSolicitante d-flex flex-column">
+                        <label for="listaMotivos">Motivo(s):</label>
+
+                        <textarea class="form-control" name="listaMotivos" id="listaMotivos" cols="20" rows="2" readonly
+                          style="resize: none; border-radius: 10px; font-size: 16px;">{{citaNueva.motivos}}
+                        </textarea>
+                      </div>
+                      <div class="motivosSolicitante d-flex flex-column">
+                        <label for="descripcionSolicitante">Descripción:</label>
+
+                        <textarea class="form-control" name="descripcionSolicitante" id="descripcionSolicitante"
+                          cols="20" rows="4" readonly style="resize: none; border-radius: 10px; font-size: 16px;">{{citaNueva.descripcion}}
+                        </textarea>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </td>
+            <td>
+              <div class="card shadow p-0 m-1">
+                <div class="card-header p-2" style="background-color: rgb(172, 168, 168);">
+                  <h2 class="mb-0 text-center">Agendar cita</h2>
+                </div>
+                <div class="card-body p-2">
+                  <div class="verAgendarCita">
+                    <form class="agendarCita m-1 d-flex flex-column" method="post">
+                      {% csrf_token %}
+                      <input type="hidden" name="idCita" id="{{citaNueva.id}}" value="{{citaNueva.id}}">
+                      <label for="{{ form.fecha.id_for_label }}">Fecha:</label>
+                      {{form.fecha}}
+                      <label for="{{ form.descripcion.id_for_label }}">Descripción:</label>
+                      {{form.descripcion}}
+                      <div class="btnAgendar text-center">
+                        <button type="submit" class="btn btn-primary rounded-pill" style="background-color: blue;">Agendar</button>
+                      </div>
+                    </form>
+                  </div>
+                </div>
+              </div>
+            </td>
+          </div>
+        </tr>
+        {% endfor %}
+
+        {% for citaAgendada in citasAgendadas %}
+        <tr>
+          <div class="citaAgendada d-flex justify-content-around flex-wrap">
+            <td style="width: 25%;">
+              <div class="card shadow p-0 m-1">
+                <div class="card-header p-2" style="background-color: rgb(78, 197, 22);">
+                  <h3 class="mb-0 text-center">Número de control:</h3>
+                  <h2 class="mb-0 text-center">{{citaAgendada.tutorado.user.idTec}}</h2>
+                </div>
+                <div class="card-body p-2">
+                  <div class="datosSolicitante mb-1 ">
+                    <div class="carreraSolicitante">
+                      <div class="campoCarrera">
+                        <p class="campoCitaSolicitante mb-0" style="font-weight: 500;">Carrera:</p>
+                      </div>
+                      <div class="campoCarreraSolicitante" style="font-weight: 700; border-radius: 5px;">
+                        <p class="mb-0 campo">{{citaAgendada.tutorado.carrera.nombre}}</p>
+                      </div>
+                    </div>
+                    <div class="campusSolicitante">
+                      <div class="campoCampus">
+                        <p class="campoCampusSolicitante mb-0" style="font-weight: 500;">Campus:
+                        </p>
+                      </div>
+                      <div class="campoCampusSolicitante" style="font-weight: 700; border-radius: 5px;">
+                        <p class="mb-0 campo">{{citaAgendada.tutorado.carrera.tecnologico.nombre}}</p>
+                      </div>
+                    </div>
+                    <div class="fechaSolicitudSolicitante">
+                      <div class="campoFechaSolicitud">
+                        <p class="campoCitaSolicitante mb-0" style="font-weight: 500;">Fecha:
+                        </p>
+                      </div>
+                      <div class="campoFechaSolicitante" style="font-weight: 700; border-radius: 5px;">
+                        <p class="mb-0 campo">{{citaAgendada.fechaDeCreacion}}</p>
+                      </div>
+                    </div>
+                    <div class="otrosSolicitante d-flex justify-content-between">
+                      <div class="edadSolicitante mr-2">
+                        <div class="campoEdad">
+                          <p class="campoCitaSolicitante mb-0" style="font-weight: 500;">Fecha de nacimiento:</p>
+                        </div>
+                        <div class="campoEdadSolicitante" style="font-weight: 700; border-radius: 5px;">
+                          <p class="mb-0 text-center campo">{{citaAgendada.tutorado.fechaDeNacimiento}}</p>
+                        </div>
+                      </div>
+                      <div class="semestreSolicitante">
+                        <div class="campoSemestre">
+                          <p class="campoCitaSolicitante mb-0" style="font-weight: 500;">Semestre:</p>
+                        </div>
+                        <div class="campoSemestreSolicitante" style="font-weight: 700; border-radius: 5px;">
+                          <p class="mb-0 text-center campo">{{citaAgendada.tutorado.semestre}}</p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </td>
+            <td>
+              <div class="card shadow p-0 m-1">
+                <div class="card-header p-2" style="background-color: rgb(78, 197, 22);">
+                  <h2 class="mb-0 text-center">Información</h2>
+                </div>
+                <div class="card-body p-2">
+                  <div class="verInfoCita">
+                    <div class="datosSolicitanteCita m-1">
+                      <div class="motivosSolicitante d-flex flex-column">
+                        <label for="listaMotivos">Motivo(s):</label>
+
+                        <textarea class="form-control" name="listaMotivos" id="listaMotivos" cols="20" rows="2" readonly
+                          style="resize: none; border-radius: 10px; font-size: 16px;">{{citaAgendada.motivos}}
+                    </textarea>
+                      </div>
+                      <div class="motivosSolicitante d-flex flex-column">
+                        <label for="descripcionSolicitante">Descripción:</label>
+
+                        <textarea class="form-control" name="descripcionSolicitante" id="descripcionSolicitante"
+                          cols="20" rows="4" readonly style="resize: none; border-radius: 10px; font-size: 16px;">{{citaAgendada.descripcion}}
+                    </textarea>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </td>
+            <td>
+              <div class="card shadow p-0 m-1">
+                <div class="card-header p-2" style="background-color: rgb(78, 197, 22);">
+                  <h2 class="mb-0 text-center">Cita agendada</h2>
+                </div>
+                <div class="card-body p-2">
+                  <div class="verAgendarCita">
+                    <div class="agendarCita m-1 ">
+                      <div class="fechaAgendar d-flex flex-column">
+                        <label for="fecha">Fecha:</label>
+                        <p class="mb-0 campo form-control">{{citaAgendada.fechaDeCita}}</p>
+                      </div>
+                      <div class="descripcionAgendar d-flex flex-column">
+                        <label for="Descripción">Descripción:</label>
+                        <textarea class="form-control" name="Descripción" id="Descripción" cols="20" rows="4" readonly
+                          style="resize: none; border-radius: 10px; font-size: 16px;">{{citaAgendada.descripcionCita}}
+                    </textarea>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </td>
+          </div>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+
+
+  </div>
+</div>
+
+{% include "includes/footer.html" %}
+
+</div>
+
+{% endblock content %}
+
+<!-- Specific JS goes HERE -->
+{% block javascripts %}
+<script src="/static/assets/js/psicologo/agendar.js"></script>
+
+<script src="/static/assets/vendor/chart.js/dist/Chart.min.js"></script>
+<script src="/static/assets/vendor/chart.js/dist/Chart.extension.js"></script>
+
+{% endblock javascripts %}

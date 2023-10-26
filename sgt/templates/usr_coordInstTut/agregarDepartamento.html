@@ -1,0 +1,39 @@
+{% extends 'layouts/base.html' %}
+
+{% block title %} Generar nuevo grupo de tutorías{% endblock title %}
+
+<!-- Specific CSS goes HERE -->
+{% block stylesheets %}
+
+{% endblock stylesheets %}
+
+{% block content %}
+
+<!-- Page content -->
+<div class="container-fluid">
+    <div class="crearNuevoGrupo d-flex justify-content-center" >
+        <form class="d-flex flex-column mt-2" method="post" >
+            <h3>Crear nuevo departamento</h3>
+            {% csrf_token %}
+            <div class="obtenerInformacion d-flex flex-column p-2" style="border: 2px solid black;">
+                <label for="{{ form.nombre.id_for_label }}">Nombre del departamento:</label>
+                {{form.nombre}}
+            </div>
+            <div class="btnCrear text-center">
+                <button type="submit" class="btn btn-primary rounded-pill m-1" style="background-color: #010780;">Crear departamento</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+{% include "includes/footer.html" %}
+</div>
+
+{% endblock content %}
+
+<!-- Specific JS goes HERE -->
+{% block javascripts %}
+<script src="/static/assets/vendor/chart.js/dist/Chart.min.js"></script>
+<script src="/static/assets/vendor/chart.js/dist/Chart.extension.js"></script>
+
+{% endblock javascripts %}

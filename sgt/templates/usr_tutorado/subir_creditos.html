@@ -1,0 +1,107 @@
+{% extends 'layouts/base.html' %}
+
+{% block title %} Tutorado | Subir Creditos {% endblock title %}
+
+<!-- Specific CSS goes HERE -->
+{% block stylesheets %}
+<link rel="stylesheet" href="https://cdn.datatables.net/1.12.1/css/dataTables.bootstrap5.min.css" />
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs5/dt-1.12.1/r-2.3.0/datatables.min.css" />
+
+{% endblock stylesheets %}
+
+{% block content %}
+
+<!-- Page content -->
+<div class="container-fluid">
+
+    <div class="shadow-lg p-3 mb-5 bg-body rounded mt-2" style="width: 100% !important; background-color: white;">
+        <table id="entregas" class="display table stripe dt-responsive table-hover text-center" style="width: 100%;">
+            <thead>
+                <tr style="background-color: black; color: white;">
+                    <th style="width: 50px;">Valor</th>
+                    <th>Curso</th>
+                    <th>Archivo</th>
+                    <th>Acción</th>
+                    <th>Estatus</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for credito in creditos %}
+                <tr>
+                    <td>{{credito.curso.valor}}</td>
+                    <td>{{credito.curso.nombre}}</td>
+                    <td>
+                        <a href='{{credito.ruta.ruta}}' target="_blank">
+                            <btn class="btn btn-primary rounded-pill" style="background-color: #010780;">
+                                Descargar
+                            </btn>
+                        </a>
+                    </td>
+                    {% if credito.estado == '1' %}
+                        <td>
+                            <form method="post">
+                                {% csrf_token %}
+                                <input type="hidden" name="fieldCredito" value="{{credito.id}}" id="fieldCredito">
+                                {{form.fieldDiferenciarCancelar}}
+                                <button type="submit" name="eliminar" class="btn btn-danger rounded-pill"
+                                    >Cancelar</button>
+                            </form>
+                        </td>
+                        <td style="color: orange;">En espera</td>
+                    {% elif credito.estado == '2' %}
+                        <td>
+                            <button type="button" class="btn btn-primary rounded-pill" disabled
+                                style="background-color: blue;">Enviar</button>
+                        </td>
+                        <td style="color: green;">Aceptado</td>
+                    {% elif credito.estado == '3' %}
+                        <td>
+                            <form method="post">
+                                {% csrf_token %}                      
+                                <input type="hidden" name="fieldCreditoEliminar" value="{{credito.id}}" id="fieldCredito">         
+                                {{form.fieldDiferenciarCancelar}}
+                                <button type="submit" name="eliminar" class="btn btn-danger rounded-pill"
+                                   >Eliminar</button>
+                            </form>
+                        </td>
+                        <td style="color: red;">Rechazado</td>
+                    {% endif %}
+                </tr>
+                {% endfor %}
+
+                <tr>
+                    <form method="post" enctype="multipart/form-data">
+                        {% csrf_token %}                        
+                        {{form.fieldDiferenciarNuevo}}
+                        <td>Nuevo</td>
+                        <td>{{form.folio}}</td>
+                        <td>{{form.fileLoad}}</td>
+                        <td>
+                            <button type="submit" class="btn btn-primary rounded-pill"
+                            style="background-color: #010780;">Enviar</button>
+                        </td>
+                        <td style="color: blue;">Nuevo</td>
+                    </form>
+                </tr>
+            </tbody>
+        </table>
+        <a href='{{archivo}}' style="width: 20%; margin-left:35%">
+            <btn class="btn btn-primary rounded-pill" style="background-color: #010780;">
+                Descargar constancia de terminación
+            </btn>
+        </a>
+    </div>
+
+    {% include "includes/footer.html" %}
+</div>
+
+{% endblock content %}
+
+<!-- Specific JS goes HERE -->
+{% block javascripts %}
+<script src="/static/assets/js/tutor_verEntregas.js"></script>
+<script type="text/javascript" src="https://cdn.datatables.net/v/bs5/dt-1.12.1/r-2.3.0/datatables.min.js"></script>
+<script src="/static/assets/vendor/chart.js/dist/Chart.min.js"></script>
+<script src="/static/assets/vendor/chart.js/dist/Chart.extension.js"></script>
+
+{% endblock javascripts %}

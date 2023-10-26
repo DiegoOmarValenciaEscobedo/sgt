@@ -1,0 +1,37 @@
+ .docentes{
+    background-color: white;
+ }
+
+ .docentes a{
+    position: relative;
+    padding: 1px;
+    border: 1px solid transparent;
+    transition: border 0.2s ease;
+    border-radius: 10px;
+    color: black;
+ }
+ 
+.docentes a:hover{
+    border: 1px solid #01004B;
+    border-radius: 10px;
+}
+
+ .imagenDocente{
+    height: 100px;
+    width: 100px;
+    border-radius: 50%;    
+ }
+
+ .imagenDocente img{
+    height: 100%;
+    width: 100%;
+    border-radius: 50%;
+ }
+
+.nombreDocente p{
+    font-weight: 400;
+}
+
+.estadoInforme :first-child{
+    font-weight: 400;
+}

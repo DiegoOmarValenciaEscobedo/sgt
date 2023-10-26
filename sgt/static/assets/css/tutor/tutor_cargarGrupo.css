@@ -1,0 +1,37 @@
+.dz{
+    position: relative;
+    margin-left: 15%;
+    width: 70%;
+    border: dotted !important;
+    border-radius: 10px;
+}
+
+.infile{
+    position: relative;
+    margin-top: 5%;
+    margin-bottom: 5%;
+}
+
+@media (max-width: 291px) {
+    .dz{
+        font-size: x-small;
+        margin-left: 0%;
+        width: 100%;
+    }
+}
+
+@media (max-width: 397px) {
+    .dz{
+        font-size: small;
+        margin-left: 0%;
+        width: 100%;
+    }
+}
+
+@media (max-width: 323px) {
+    .dz{
+        font-size: x-small;
+        margin-left: 0%;
+        width: 100%;
+    }
+}

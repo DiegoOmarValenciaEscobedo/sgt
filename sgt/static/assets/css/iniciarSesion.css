@@ -1,0 +1,72 @@
+form p {
+    display: flex;
+    flex-direction: column;
+}
+
+p input {
+    border-radius: 50rem
+}
+
+p label {
+    color: #485976;
+    font-weight: 400;
+}
+
+.armafugod {
+    width: 555px;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 0px 24px 35px 24px;
+}
+
+.logcontainer {
+    background-color: #ffff;
+    border-radius: 18px;
+}
+
+.imagenesconten {
+    margin-top: 25px;
+}
+
+.inputscontent {
+    margin: 0px 24px;
+}
+h5{
+    text-align: center;
+    margin-top: 50px;
+    padding: 0 1.5rem;
+    font-weight: 600;
+    font-size: 1.5rem;
+    line-height: 1.375;
+    color: #6c7891;
+}
+.centerimages{
+    display: flex;
+    flex-direction: column;
+}
+.centerimages, div, img{
+    margin-left: auto;
+    margin-right: auto;
+}
+.tamimagenes{
+    width: 200px;
+}
+
+@media screen and (min-width: 992px) {
+    .imgmafu{
+        width: 325px;
+    }
+}
+@media screen and (min-width: 768px) and (max-width: 991px) {
+    .imgmafu{
+        width: 350px;
+    }
+}
+@media screen and (max-width: 767px) {
+    .imgmafu{
+        width: 200px;
+    }
+    .armafugod{
+        width: auto;
+    }
+}

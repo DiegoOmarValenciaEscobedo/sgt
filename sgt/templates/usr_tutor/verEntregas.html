@@ -1,0 +1,85 @@
+{% extends 'layouts/base.html' %}
+
+{% block title %} Grupos {% endblock title %}
+
+<!-- Specific CSS goes HERE -->
+{% block stylesheets %}
+<link rel="stylesheet" href="/static/assets/css/tutor/tutor_verGrupo.css">
+<link rel="stylesheet" href="https://cdn.datatables.net/1.12.1/css/dataTables.bootstrap5.min.css" />
+<link rel="stylesheet" href="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.min.css">
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs5/dt-1.12.1/r-2.3.0/datatables.min.css" />
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+{% endblock stylesheets %}
+
+{% block content %}
+
+<!-- Page content -->
+<div class="container-fluid">
+    <div class="container text-center">
+        <div class="row">
+            <div class="col-md-6 offset-md-3">
+                <div class="btn-group" aria-label="Basic example">
+                    <a href="{% url 'verGrupo' grupo %}"><button type="button" class="btn btn-primary rounded-pill"
+                            id="boton2">Ver grupo</button></a>
+                    <a href="{% url 'actividades' grupo %}"><button type="button" class="btn btn-primary rounded-pill"
+                            id="boton1">Actividades</button></a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="shadow-lg p-3 mb-5 bg-body rounded" style="width: 100% !important; background-color: white;">
+        <table id="entregas" class="display table" style="width: 100%;">
+            <thead>
+                <tr style="background-color: black; color: white;">
+                    <th>Número de control</th>
+                    <th>Nombre</th>
+                    <th>Estatus</th>
+                    <th>Entrega</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for entrega in entregas %}
+                <tr>
+                    <td>{{entrega.tutorado.user.idTec}}</td>
+                    <td>{{entrega.tutorado.user.nombre}} {{entrega.tutorado.user.aPaterno}}
+                        {{entrega.tutorado.user.aMaterno}}</td>
+                    {% if entrega.estado == 'P' %}
+                    <td style="color:orange;">{{entrega.get_estado_display}}</td>
+                    <td></td>
+                    {% elif entrega.estado == 'E' %}
+                    {% for ar in entregasArch %}
+                    {% if ar.entregas.id == entrega.id %}
+                    <td style="color:green;">{{entrega.get_estado_display}}</td>
+                    <td><a href="{{ar.archivo.ruta}}" target="_blank"><span class="material-icons text-primary"
+                                title="Generar">system_update_alt</span></a></td>
+                    {% endif %}
+                    {% endfor %}
+                    {% elif entrega.estado == 'R' %}
+                    <td style="color:darkred">{{entrega.get_estado_display}}</td>
+                    <td></td>
+                    {% endif %}
+                </tr>
+                {% endfor %}
+            <tfoot>
+                <tr>
+                    <th>Número de control</th>
+                    <th>Nombre</th>
+                    <th>Estatus</th>
+                    <th>Entrega</th>
+                </tr>
+            </tfoot>
+        </table>
+    </div>
+
+    {% include "includes/footer.html" %}
+</div>
+
+{% endblock content %}
+
+<!-- Specific JS goes HERE -->
+{% block javascripts %}
+
+<script src="/static/assets/js/tutor/tutor_verEntregas.js"></script>
+
+
+{% endblock javascripts %}

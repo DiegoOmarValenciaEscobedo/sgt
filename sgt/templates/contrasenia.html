@@ -1,0 +1,75 @@
+{% extends 'layouts/base.html' %}
+
+{% block title %} Dashboard {% endblock title %}
+
+<!-- Specific CSS goes HERE -->
+{% block stylesheets %}
+<link rel="stylesheet" href="/static/assets/css/perfil_docente.css">
+{% endblock stylesheets %}
+
+{% block content %}
+
+<!-- {% if mensaje %}
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+        <strong>!Correcto¡</strong> Se notifico al psicologo de la cita.
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+{% endif %} -->
+
+<!-- Page content -->
+<div class="container-fluid">
+    <div class="perfil row mt-2">
+        <div class="espacioFotoPerfil card bg-transparent col-12 col-md-5" style="height: 100%;">
+            <div class="card-body">
+                <div class="fotoPerfil">
+                    <input type="text" name="" id="p" hidden value="{{request.user.id}}">
+                    <img src="{{request.user.fotoDePerfil.url}}" alt="FotoPerfil" class="image-fluid">
+                </div>
+            </div>
+        </div>
+        <div class="infoPerfil d-flex flex-column justify-content-center col-12 col-md-7 mt-1">
+            <div class="espacioDatosGenerales">
+                <div class="titulo">
+                    <h3>Cambiar contraseña</h3>
+                </div>
+                <form action="#" method="post">
+                    <div class="datos p-2">
+                        {% csrf_token %}
+                        <div class="password row col-12 m-0">
+                            <label for="{{ form.actual.id_for_label }}" class="campo col-sm-6 p-0">Contraseña
+                                actual:</label>
+                            {{form.actual}}
+                        </div>
+                        <div class="newPassword row col-12 mt-2 m-0">
+                            <label for="{{ form.nueva.id_for_label }}" class="campo col-sm-6 p-0">Contraseña nueva:</label>
+                            {{form.nueva}}
+                        </div>
+                        <div class="repitePassword row col-12 mt-2 m-0">
+                            <label for="{{ form.repetirNueva.id_for_label }}" class="campo col-sm-6 p-0">Repite la
+                                contraseña nueva:</label>
+                            {{form.repetirNueva}}
+                        </div>
+                    </div>
+                    <div class="botones mt-2 d-flex flex-wrap justify-content-center">
+                        <button type="button" class="btn btn-danger rounded-pill" onclick="location.href='/perfil/'" style="background-color: #7C3030;">Cancelar</button>
+                        <button type="submit" class="btn btn-primary rounded-pill" style="background-color: #010780;">Guardar</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% include "includes/footer.html" %}
+</div>
+
+{% endblock content %}
+
+<!-- Specific JS goes HERE -->
+{% block javascripts %}
+
+<script src="/static/assets/js/changepass.js"></script>
+
+{% endblock javascripts %}

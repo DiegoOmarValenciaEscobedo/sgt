@@ -1,0 +1,65 @@
+{% extends 'layouts/base.html' %}
+
+{% block title %} Dashboard {% endblock title %}
+
+<!-- Specific CSS goes HERE -->
+{% block stylesheets %}
+<link rel="stylesheet" href="/static/assets/css/documentacion/documentacion.css">
+{% endblock stylesheets %}
+
+{% block content %}
+
+<!-- Page content -->
+<div class="container-fluid">
+    <div class="documentacion d-flex justify-content-around py-5 flex-wrap">
+        {% if dirPIT != '' %}
+        <div class="pit card bg-transparent">
+            <div class="card-content">
+                <a class="image btn p-0 m-0" href="{{dirPIT}}" target="_blank">
+                    <img src="/static/assets/img/brand/LogoTecNMBlue.svg" alt="TecNMBlue" class="image-fluid">
+                </a>
+                <div class="card-body">
+                    <p>Plan Interno de Tutorías</p>
+                </div>
+            </div>
+        </div>
+        {% endif %}
+        {% if dirPAT != '' %}
+        <div class="pat card bg-transparent">
+            <div class="card-content">
+                <a class="image btn p-0 m-0" href="{{dirPAT}}" target="_blank">
+                    <img src="/static/assets/img/brand/LogoTecNMBlue.svg" alt="TecNMBlue" class="image-fluid">
+                </a>
+                <div class="card-body">
+                    <p>Plan de Acción Tutorial</p>
+                </div>
+            </div>
+        </div>
+        {% endif %}
+        {% if dirAP != '' %}
+        <div class="pat card bg-transparent">
+            <div class="card-content">
+                <a class="image btn p-0 m-0" href="{{dirAP}}" target="_blank">
+                    <img src="/static/assets/img/brand/LogoTecNMBlue.svg" alt="TecNMBlue" class="image-fluid">
+                </a>
+                <div class="card-body">
+                    <p>Aviso de privacidad</p>
+                </div>
+            </div>
+        </div>
+        {% endif %}
+    </div>
+</div>
+
+{% include "includes/footer.html" %}
+</div>
+
+{% endblock content %}
+
+<!-- Specific JS goes HERE -->
+{% block javascripts %}
+
+<script src="/static/assets/vendor/chart.js/dist/Chart.min.js"></script>
+<script src="/static/assets/vendor/chart.js/dist/Chart.extension.js"></script>
+
+{% endblock javascripts %}

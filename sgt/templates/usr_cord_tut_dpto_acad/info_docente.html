@@ -1,0 +1,129 @@
+{% extends 'layouts/base.html' %}
+
+{% block title %} Dashboard {% endblock title %}
+
+<!-- Specific CSS goes HERE -->
+{% block stylesheets %}
+<link rel="stylesheet" href="/static/assets/css/perfil_docente.css">
+{% endblock stylesheets %}
+
+{% block content %}
+
+<!-- Page content -->
+<div class="container-fluid">
+    <div class="perfil row mt-2">
+        <div class="espacioFotoPerfil card bg-transparent col-12 col-md-5" style="height: 100%;">
+            <div class="card-body">
+                <div class="fotoPerfil">
+                    <img src="/media/{{docente.personal.user.fotoDePerfil}}" alt="FotoPerfil" class="image-fluid">
+                </div>
+            </div>
+        </div>
+        <div class="infoPerfil d-flex flex-column justify-content-center col-12 col-md-7 mt-1">
+            <div class="espacioDatosGenerales">
+                <div class="titulo">
+                    <h3>Datos generales</h3>
+                </div>
+                <div class="datos p-2">
+                    <div class="nombreDocente row col-12">
+                        <p class="campo col-sm-6">Nombre:</p>
+                        <p class="campoNombreDocente col-sm-6">{{docente.personal.user.nombre}}</p>
+                    </div>
+                    <div class="nombreApellidos row col-12">
+                        <p class="campo col-sm-6">Apellido:</p>
+                        <p class="nombreApellidos col-sm-6">{{docente.personal.user.aPaterno}}
+                            {{docente.personal.user.aMaterno}}</p>
+                    </div>
+                    <div class="generoDocente row col-12">
+                        <p class="campo col-sm-6">Género:</p>
+                        <p class="campoGeneroDocente col-sm-6">{{docente.personal.user.genero}}</p>
+                    </div>
+                    <div class="rfcDocente row col-12">
+                        <p class="campo col-sm-6">RFC:</p>
+                        <p class="campoRFCDocente col-sm-6">{{docente.personal.user.idTec}}</p>
+                    </div>
+                </div>
+            </div>
+            <div class="espacioDatosEscolares mt-2">
+                <div class="titulo">
+                    <h3>Datos escolares</h3>
+                </div>
+                <div class="datos p-2">
+                    <div class="correoElectronicoDocente row col-12">
+                        <p class="campo col-sm-6">Correo electrónico:</p>
+                        <p class="campoCorreoDocente col-sm-6">{{docente.personal.user.email}}</p>
+                    </div>
+                    <div class="departamentoDocente row col-12">
+                        <p class="campo col-sm-6">Departamento:</p>
+                        <p class="campoDepartamentoDocente col-sm-6">{{docente.personal.user.personal.departamento}}</p>
+                    </div>
+                    <div class="puesto row col-12">
+                        <p class="campo col-sm-6">Puesto:</p>
+                        <p class="campoPuesto col-sm-6">{{docente.personal.user.get_tipouser_display}}</p>
+                    </div>
+                    {%if docente.personal.user.tipouser == 'T_R'%}
+                    <div class="gruposDocente row col-12">
+                        <p class="campo col-sm-6">Grupo(s):</p>
+                        <div class="campoGrupoDocente col-sm-6 d-flex flex-column">
+                            {% for grupo in reportes %}
+                            <p class="grupo">{{grupo.grupo.nombre}}</p>
+                            {%endfor%}
+                        </div>
+                    </div>
+                    {%endif%}
+                    <div class="telefonoDocente row col-12">
+                        <p class="campo col-sm-6">Télefono:</p>
+                        <p class="campoTelefonoDocente col-sm-6">{{docente.personal.user.telefono}}</p>
+                    </div>
+                    {%if docente.personal.user.tipouser == 'T_R'%}
+                    <div class="cubiculoDocente row col-12">
+                        <p class="campo col-sm-6">Cubículo:</p>
+                        <p class="campoCubiculoDocente col-sm-6">{{docente.personal.localizacion}}</p>
+                    </div>
+                    {% else %}
+                    <div class="edificioDocente row col-12">
+                        <p class="campo col-sm-6">Edificio:</p>
+                        <p class="campoEdificioDocente col-sm-6">{{docente.personal.localizacion}}</p>
+                    </div>
+                    {%endif%}
+                </div>
+            </div>
+            <div class="espacioReportes mt-2">
+                <div class="titulo">
+                    <h3>Reportes</h3>
+                </div>
+                <div class="datos p-2">
+                    {% for reporte in reportes %}
+                    <div class="reporte{{reporte.grupo.nombre}} row col-12 align-content-center">
+                        <p class="col-sm-6 m-0">{{reporte.grupo.nombre}}</p>
+                        <div
+                            class="col-sm-6 form-floating d-flex justify-content-around flex-wrap align-content-center">
+                            <select class="form-select" id="floatingSelect" aria-label="Floating label select example">
+                                <option selected>Semestral</option>
+                            </select>
+                            {% if reporte.grupo.reporte.archivo != null %}
+                            <a href="{{reporte.grupo.reporte.archivo.ruta}}" target="_blank">
+                                <button class="btn btn-primary rounded-pill p-2">Descargar</button>
+                            </a>
+                            {% endif %}
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% include "includes/footer.html" %}
+</div>
+
+{% endblock content %}
+
+<!-- Specific JS goes HERE -->
+{% block javascripts %}
+
+<script src="/static/assets/vendor/chart.js/dist/Chart.min.js"></script>
+<script src="/static/assets/vendor/chart.js/dist/Chart.extension.js"></script>
+
+{% endblock javascripts %}

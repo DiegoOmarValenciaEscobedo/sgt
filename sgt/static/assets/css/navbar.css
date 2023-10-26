@@ -1,0 +1,26 @@
+#user_name {
+    color: white;
+    font-size: 1.1rem;
+    padding-left: 12px;
+    padding-right: 12px;
+    text-align: center;
+}
+
+.user {
+    padding-top: 15px;
+    padding-left: 30px;
+    padding-right: 30px;
+    padding-bottom: 5px;
+}
+
+.img-thumbnail {
+    background-color: lightgray;
+    border: 2px solid #fff;
+    border-radius: 50%;
+    padding: 0.5px;
+}
+
+.iconoo {
+    color: white !important;
+    font-size: 20px !important;
+}

@@ -1,0 +1,41 @@
+{% extends 'layouts/base.html' %}
+
+{% block title %} Grupos {% endblock title %}
+
+<!-- Specific CSS goes HERE -->
+{% block stylesheets %}
+<link rel="stylesheet" href="/static/assets/css/tutor_grupos.css">
+{% endblock stylesheets %}
+
+{% block content %}
+
+<!-- Page content -->
+<div class="container-fluid">
+    <div class="container text-center">
+        <div class="justify-content-center align-items-center">
+          <!--Se cargan los grupos dinamicamete -->
+          {% if grupos%}
+            {%for a in grupos%}
+              <a href="{% url 'verGrupo' id=a.grupo_id %}">
+                  <button type="button" class="btn" id="circulo">{{a.grupo.nombre}}</button>
+              </a>
+            {% endfor %}
+          {% else %}
+            <div class="justify-content-center align-items-center my-9">
+              <span class="text-warning">Aun no tienes grupos asignados</span>
+            </div>
+          {% endif %}
+        </div>
+    </div>
+  </div>
+
+  {% include "includes/footer.html" %}
+</div>
+
+{% endblock content %}
+
+<!-- Specific JS goes HERE -->
+{% block javascripts %}
+
+
+{% endblock javascripts %}

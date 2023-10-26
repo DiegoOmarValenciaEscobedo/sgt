@@ -1,0 +1,58 @@
+{% extends 'layouts/base.html' %}
+
+{% block title %} Grupos {% endblock title %}
+
+<!-- Specific CSS goes HERE -->
+{% block stylesheets %}
+  <link rel="stylesheet" href="/static/assets/css/tutor/tutor_cargarGrupo.css">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+{% endblock stylesheets %}
+
+{% block content %}
+
+<!-- Page content -->
+<div class="container-fluid">  
+  <div class="col-xs justify-content-center align-items-center text-center my-2">
+    <span class="text-center mb-4">Cargar Grupo: {{grupo.nombre}} </span>
+  </div>
+  <div class="card justify-content-center align-items-center my-5 dz">
+    <div id="extra" class="justify-content-center align-items-center text-center">
+      <img src="/static/assets/img/icons/upload.png" alt="fotito" style="width:100px;" class="mt-4">
+      <br><span class="text-center mb-4">Selecciona el archivo con la lista de alumnos<br>
+        Recuerda que solo se admiten archivos con extension .xlsx, .cvs y .xls</span>
+    </div>
+    <form method="POST" id="cargar_excel" enctype="multipart/form-data">
+      {% csrf_token %}
+      <div id="botones" class="justify-content-center align-items-center text-center">
+      </div>
+      <div class="infile">
+          <input name="lista_alumnos" id="lista_alumnos" type="file" onchange="return validarArchivo()"/>
+      </div>
+    </form>
+    
+  </div>
+
+  <div class="my-2">
+    <table id="example" class="display table-xs stripe dt-responsive table-hover text-xs" style="width: 90%; margin-left:5%">
+      <thead>
+        <tr style="background-color: black; color: white;">
+        </tr>
+      </thead>
+      <tbody>
+      </tbody>
+    </table>
+  </div>
+  {% include "includes/footer.html" %}
+   
+</div>
+
+{% endblock content %}
+
+<!-- Specific JS goes HERE -->
+{% block javascripts %}
+
+<script src="/static/assets/js/TUTOR/tutor_cargarGrupo.js"></script>
+<script src="/static/assets/js/TUTOR/read-excel-file.js"></script>
+<script src="/static/assets/js/TUTOR/sweetalert.js"></script>
+
+{% endblock javascripts %}

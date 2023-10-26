@@ -1,0 +1,77 @@
+{% extends 'layouts/base.html' %}
+
+{% block title %} Coordinador Institucional de Tutorias {% endblock title %}
+
+<!-- Specific CSS goes HERE -->
+{% block stylesheets %}
+<link rel="stylesheet" href="https://cdn.datatables.net/1.12.1/css/dataTables.bootstrap5.min.css" />
+<link rel="stylesheet" href="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.min.css">
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs5/dt-1.12.1/r-2.3.0/datatables.min.css" />
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+{% endblock stylesheets %}
+
+{% block content %}
+
+{% if mensaje %}
+  <div class="alert alert-success alert-dismissible fade show" role="alert">
+    <strong>!Correcto¡</strong> La constancia fue generada y mandada al tutor. 
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+{% endif %}
+
+<!-- Page content -->
+<div class="container-fluid">
+  <div class="shadow-lg p-3 mb-5 bg-body rounded" style="background-color: white;">
+    <div style="width: 100% !important;">
+      <table id="example" class="display table" style="width: 100%;">
+        <thead>
+          <tr style="background-color: black; color: white;">
+            <th>RFC</th>
+            <th>Nombre</th>
+            <th>Grupo</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          {% if grupos %}
+            {% for a in grupos %}
+              <tr>
+                <td>{{a.personal.user.idTec}}</td>
+                <td>{{a.personal.user.nombre}} {{a.personal.user.aPaterno}} {{a.personal.user.aMaterno}}</td>
+                <td>{{a.grupo.nombre}}</td>
+                <td>
+                  <form method='POST'>
+                    {% csrf_token %}
+                    <input name="personal_grupo" type="hidden" value="{{a.id}}"/>
+                    <button type="submit" class="border material-icons text-primary bg-white">
+                      system_update_alt
+                    </button>
+                  </form>
+                </td>
+              </tr>
+            {% endfor %}
+          {% else %}
+            <div class="justify-content-center align-items-center text-center">
+              <img src="/static/assets/img/icons/error.png" alt="error" style="width:100px;" class="mt-4"><br>
+              <span class="text-danger">No hay tutores en este momento</span>
+            </div>
+          {% endif %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  {% include "includes/footer.html" %}
+</div>
+
+{% endblock content %}
+
+<!-- Specific JS goes HERE -->
+{% block javascripts %}
+
+<script src="/static/assets/js/CIT/creditoComplementario.js"></script>
+
+
+{% endblock javascripts %}

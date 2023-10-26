@@ -1,0 +1,207 @@
+{% extends 'layouts/base.html' %}
+
+{% block title %} Coordinador de Tutorias del Dpto. Acadeemico {% endblock title %}
+
+<!-- Specific CSS goes HERE -->
+{% block stylesheets %}
+<link rel="stylesheet" type="text/css" href="/static/assets/css/usr_cord_tut_dpto_acad/reportes_docentes.css">
+{% endblock stylesheets %}
+
+{% block content %}
+
+<!-- Page content -->
+<div class="container-fluid mt-2">
+
+  {% for carrera in carreras %}
+  <div class="d-flex flex-column border border-dark border-start-0 rounded-end mt-5 carrera">
+    <span style="color:grey;" class="mt--4">{{carrera.nombre}}</span>
+    <div class="d-flex flex-wrap justify-content-around p-1 docentes">
+      {% for docente in docentes %}
+      {% if docente.carrera.nombre == carrera.nombre%}
+        {%if docente.grupo.reporte == null%}
+        <a href="{% url 'ctda_info_docente' id=docente.personal.id %}">
+          <div class="docente d-flex justify-content-center w-100">
+            <div class="imagenDocente" style="border: 5px solid red;">
+              <img src="/media/{{docente.personal.user.fotoDePerfil}}" alt="FotoPerfil" class="image-fluid">
+            </div>
+            <div class="datosDocente d-flex flex-column justify-content-around">
+              <div class="nombreDocente">
+                <p>{{docente.personal.user.nombre}}</p>
+              </div>
+              <div class="estadoInforme">
+                <P class="m-0 campo">Informe: </P>
+                <p class="m-0 estado">No enviado</p>
+              </div>
+            </div>
+          </div>
+        </a>
+        {% else %}
+        <a href="{% url 'ctda_info_docente' id=docente.personal.id %}">
+          <div class="docente d-flex justify-content-center w-100">
+            <div class="imagenDocente" style="border: 5px solid green;">
+              <img src="/media/{{docente.personal.user.fotoDePerfil}}" alt="FotoPerfil" class="image-fluid">
+            </div>
+            <div class="datosDocente d-flex flex-column justify-content-around">
+              <div class="nombreDocente">
+                <p>{{docente.personal.user.nombre}}</p>
+              </div>
+              <div class="estadoInforme">
+                <P class="m-0 campo">Informe: </P>
+                <p class="m-0 estado">Enviado</p>
+              </div>
+            </div>
+          </div>
+        </a>
+        {% endif %}
+      {% endif %}
+      {% endfor %}
+    </div>
+  </div>
+  {% endfor %}
+  <!-- <div class="d-flex flex-column border border-light rounded mt-5 carrera">
+    <span style="color:grey" class="mt--4">Sistemas Computacionales</span>
+    <div class="d-flex flex-wrap justify-content-around p-1 docentes">
+      <a href="/ctda_info_docente">
+        <div class="docente d-flex justify-content-center w-100">
+          <div class="imagenDocente" style="border: 5px solid red;">
+            <img src="{{request.user.fotoDePerfil.url}}" alt="FotoPerfil" class="image-fluid">
+          </div>
+          <div class="datosDocente d-flex flex-column justify-content-around">
+            <div class="nombreDocente">
+              <p>Pablo Juarez</p>
+            </div>
+            <div class="estadoInforme">
+              <P class="m-0 campo">Informe: </P>
+              <p class="m-0 estado">No enviado</p>
+            </div>
+          </div>
+        </div>
+      </a>
+      <a href="/ctda_info_docente">
+        <div class="docente d-flex justify-content-center w-100">
+          <div class="imagenDocente" style="border: 5px solid red;">
+            <img src="{{request.user.fotoDePerfil.url}}" alt="FotoPerfil" class="image-fluid">
+          </div>
+          <div class="datosDocente d-flex flex-column justify-content-around">
+            <div class="nombreDocente">
+              <p>Pablo Juarez</p>
+            </div>
+            <div class="estadoInforme">
+              <P class="m-0 campo">Informe: </P>
+              <p class="m-0 estado">No enviado</p>
+            </div>
+          </div>
+        </div>
+      </a>
+      <a href="/ctda_info_docente">
+        <div class="docente d-flex justify-content-center w-100">
+          <div class="imagenDocente" style="border: 5px solid green;">
+            <img src="{{request.user.fotoDePerfil.url}}" alt="FotoPerfil" class="image-fluid">
+          </div>
+          <div class="datosDocente d-flex flex-column justify-content-around">
+            <div class="nombreDocente">
+              <p>Pablo Juarez</p>
+            </div>
+            <div class="estadoInforme">
+              <P class="m-0 campo">Informe: </P>
+              <p class="m-0 estado">No enviado</p>
+            </div>
+          </div>
+        </div>
+      </a>
+      <a href="/ctda_info_docente">
+        <div class="docente d-flex justify-content-center w-100">
+          <div class="imagenDocente" style="border: 5px solid green;">
+            <img src="{{request.user.fotoDePerfil.url}}" alt="FotoPerfil" class="image-fluid">
+          </div>
+          <div class="datosDocente d-flex flex-column justify-content-around">
+            <div class="nombreDocente">
+              <p>Pablo Juarez</p>
+            </div>
+            <div class="estadoInforme">
+              <P class="m-0 campo">Informe: </P>
+              <p class="m-0 estado">No enviado</p>
+            </div>
+          </div>
+        </div>
+      </a>
+      <a href="/ctda_info_docente">
+        <div class="docente d-flex justify-content-center w-100">
+          <div class="imagenDocente" style="border: 5px solid red;">
+            <img src="{{request.user.fotoDePerfil.url}}" alt="FotoPerfil" class="image-fluid">
+          </div>
+          <div class="datosDocente d-flex flex-column justify-content-around">
+            <div class="nombreDocente">
+              <p>Pablo Juarez</p>
+            </div>
+            <div class="estadoInforme">
+              <P class="m-0 campo">Informe: </P>
+              <p class="m-0 estado">No enviado</p>
+            </div>
+          </div>
+        </div>
+      </a>
+      <a href="/ctda_info_docente">
+        <div class="docente d-flex justify-content-center w-100">
+          <div class="imagenDocente" style="border: 5px solid red;">
+            <img src="{{request.user.fotoDePerfil.url}}" alt="FotoPerfil" class="image-fluid">
+          </div>
+          <div class="datosDocente d-flex flex-column justify-content-around">
+            <div class="nombreDocente">
+              <p>Pablo Juarez</p>
+            </div>
+            <div class="estadoInforme">
+              <P class="m-0 campo">Informe: </P>
+              <p class="m-0 estado">No enviado</p>
+            </div>
+          </div>
+        </div>
+      </a>
+      <a href="/ctda_info_docente">
+        <div class="docente d-flex justify-content-center w-100">
+          <div class="imagenDocente" style="border: 5px solid green;">
+            <img src="{{request.user.fotoDePerfil.url}}" alt="FotoPerfil" class="image-fluid">
+          </div>
+          <div class="datosDocente d-flex flex-column justify-content-around">
+            <div class="nombreDocente">
+              <p>Pablo Juarez</p>
+            </div>
+            <div class="estadoInforme">
+              <P class="m-0 campo">Informe: </P>
+              <p class="m-0 estado">No enviado</p>
+            </div>
+          </div>
+        </div>
+      </a>
+      <a href="/ctda_info_docente">
+        <div class="docente d-flex justify-content-center w-100">
+          <div class="imagenDocente" style="border: 5px solid green;">
+            <img src="{{request.user.fotoDePerfil.url}}" alt="FotoPerfil" class="image-fluid">
+          </div>
+          <div class="datosDocente d-flex flex-column justify-content-around">
+            <div class="nombreDocente">
+              <p>Pablo Juarez</p>
+            </div>
+            <div class="estadoInforme">
+              <P class="m-0 campo">Informe: </P>
+              <p class="m-0 estado">No enviado</p>
+            </div>
+          </div>
+        </div>
+      </a>
+    </div>
+  </div> -->
+
+  {% include "includes/footer.html" %}
+
+</div>
+
+{% endblock content %}
+
+<!-- Specific JS goes HERE -->
+{% block javascripts %}
+
+<script src="/static/assets/vendor/chart.js/dist/Chart.min.js"></script>
+<script src="/static/assets/vendor/chart.js/dist/Chart.extension.js"></script>
+
+{% endblock javascripts %}

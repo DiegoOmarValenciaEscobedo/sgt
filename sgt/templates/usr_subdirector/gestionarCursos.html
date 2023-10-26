@@ -1,0 +1,172 @@
+{% extends 'layouts/base.html' %}
+
+{% block title %} Cursos {% endblock title %}
+
+<!-- Specific CSS goes HERE -->
+{% block stylesheets %}
+<link rel="stylesheet" href="https://cdn.datatables.net/1.12.1/css/dataTables.bootstrap5.min.css" />
+<link rel="stylesheet" href="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.min.css">
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs5/dt-1.12.1/r-2.3.0/datatables.min.css" />
+{% endblock stylesheets %}
+
+{% block content %}
+
+<!-- Page content -->
+<div class="container-fluid" style="height: 100%;">
+    <button type="button" style="background-color: blue;" class="btn btn-primary mt-2" data-bs-toggle="modal" data-bs-target="#agregarCurso">
+        Agregar curso
+    </button>
+    <div class="gestionDeCursos d-flex flex-column flex-wrap">
+        <div class="cursosAprobados mt-2 w-100">
+            <h3>Cursos aprobados:</h3>
+            <table class="display dataTable dt-responsive table-hover dataCreditosTutorados">
+                <thead style="background-color: black; color: white;">
+                    <th>Folio</th>
+                    <th>Nombre</th>
+                    <th>Fecha de agregación</th>
+                    <th>Cantidad de alumnos</th>
+                    <th>Docente encargado</th>
+                    <th>Valor</th>
+                </thead>
+                <tbody>
+                    {% for cursoAprobado in cursosAprobados %}
+                    <tr>
+                        <td>{{cursoAprobado.folio}}</td>
+                        <td>{{cursoAprobado.nombre}}</td>
+                        <td>{{cursoAprobado.fecha}}</td>
+                        <td>{{cursoAprobado.cantTutorados}}</td>
+                        <td>{{cursoAprobado.encargado.user.nombre}} {{cursoAprobado.encargado.user.aPaterno}}
+                            {{cursoAprobado.encargado.user.aMaterno}}</td>
+                        <td>{{cursoAprobado.valor}}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        <div class="cursosSinAprobar mt-2 w-100">
+            <h3>Créditos con número de folio no registrado:</h3>
+            <table class="display dataTable dt-responsive table-hover dataCreditosTutorados">
+                <thead style="background-color: black; color: white;">
+                    <th>Folio del curso</th>
+                    <th>Acciones</th>
+                </thead>
+                <tbody>
+                    {% for cursoPendiente in cursosPendientes %}
+                    <tr>
+                        <form method="post">
+                            {% csrf_token %}
+                            <td>{{cursoPendiente.folio}}</td>
+                            <td>
+                                <input type="hidden" name="fieldCursoEliminar" value="{{cursoPendiente.id}}"
+                                    id="fieldCursoEliminar">
+                                <button type="submit" class="btn btn-danger rounded-pill">Rechazar</button>
+                            </td>
+                        </form>
+
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="creditosTutorados w-100">
+        <h3>Créditos pendientes por aceptar de alumnos:</h3>
+        <table class="display dataTable dt-responsive table-hover dataCreditosTutorados">
+            <thead style="background-color: black; color: white;">
+                <th>No. de control</th>
+                <th>Fecha de envío</th>
+                <th>Folio del curso</th>
+                <th>Nombre del curso</th>
+                <th>Archivo</th>
+                <th>Acciones</th>
+            </thead>
+            <tbody>
+                {% for creditoTutorado in creditosTutorado %}
+                <tr>
+                    <td>{{creditoTutorado.tutorado.user.idTec}}</td>
+                    <td>{{creditoTutorado.fechaDeEnvio}}</td>
+                    <td>{{creditoTutorado.curso.folio}}</td>
+                    <td>{{creditoTutorado.curso.nombre}}</td>
+                    <td>
+                        <a href="{{creditoTutorado.ruta.ruta}}" target="_blank" style="border: 2px solid black;">
+                            <i class="fa-solid fa-download" style="font-size: 20px !important; color: black;"></i>
+                        </a>
+                    </td>
+                    <td >
+                        <div class="acciones d-flex">
+                            <form method="post">
+                                {% csrf_token %}
+                                <input type="hidden" name="fieldCreditoAprobar" value="{{creditoTutorado.id}}"
+                                    id="fieldCreditoAprobar">
+                                <button type="submit" class="btn btn-primary rounded-pill" style="background-color: blue;">Aceptar</button>
+                            </form>
+                            <form method="post">
+                                {% csrf_token %}
+                                <input type="hidden" name="fieldCreditoRechazar" value="{{creditoTutorado.id}}"
+                                    id="fieldCreditoRechazar">
+                                <button type="submit" class="btn btn-danger rounded-pill">Rechazar</button>
+                            </form>
+                        </div>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Modal -->
+    <div class="modal fade" id="agregarCurso" tabindex="-1" aria-labelledby="agregarCurso" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3>Agregar nuevo curso:</h3>
+                </div>
+                <div class="modal-body">
+                    <form method="post" class="p-1">
+                        {% csrf_token %}
+                        <div class="campo d-flex flex-column m-0">
+                            <label for="{{ formCrearCurso.nombre.id_for_label }}">Nombre:</label>
+                            {{formCrearCurso.nombre}}
+                            <label for="{{ formCrearCurso.folio.id_for_label }}">Folio:</label>
+                            {{formCrearCurso.folio}}
+                        </div>
+                        <div class="campo d-flex justify-content-between flex-wrap m-0">
+                            <div class="cantTutoradosCampo p-0">
+                                <label for="{{ formCrearCurso.cantTutorados.id_for_label }}">Cantidad de
+                                    tutorados:</label>
+                                {{formCrearCurso.cantTutorados}}
+                            </div>
+                            <div class="valorCampo ">
+                                <label for="{{ formCrearCurso.valor.id_for_label }}">Valor:</label>
+                                {{formCrearCurso.valor}}
+                            </div>
+                        </div>
+                        <div class="campo">
+                            <label for="{{ formCrearCurso.encargadoNombre.id_for_label }}">Encargado:</label>
+                            {{formCrearCurso.encargadoNombre}}
+                        </div>
+                        <div class="btnAgregarCurso text-center mt-1">
+                            <button type="submit" class="btn btn-primary rounded-pill"
+                                style="background-color: blue;">Agregar
+                                curso</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% include "includes/footer.html" %}
+
+</div>
+
+{% endblock content %}
+
+<!-- Specific JS goes HERE -->
+{% block javascripts %}
+<script src="/static/assets/js/SUB/cursos.js"></script>
+<script src="/static/assets/vendor/chart.js/dist/Chart.min.js"></script>
+<script src="/static/assets/vendor/chart.js/dist/Chart.extension.js"></script>
+
+{% endblock javascripts %}

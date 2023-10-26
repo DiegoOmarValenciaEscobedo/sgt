@@ -1,0 +1,79 @@
+#boton1{
+    width: 100%;
+    align-items: center;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    background-color: black;
+    color: white;
+    border: 0px;
+}
+#boton2{
+    width: 100%;
+    align-items: center;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    border: 0px;
+    background-color: lightgray;
+    color: black;
+}
+
+#boton2:hover{
+    background-color: black;
+    color: white;
+}
+
+#btnmodal {
+    width: auto;
+    height: 30%;
+    margin-top: 7px;
+    background-color: darkblue;
+    color: white;
+}
+
+@media (max-width: 291px) {
+    #boton1{
+        font-size: x-small;
+    }
+    #boton2{
+        font-size: x-small;
+    }
+}
+
+#boton2:hover{
+    background-color: black;
+    color: white;
+}
+
+#btnmodal {
+    width: auto;
+    height: 30%;
+    margin-top: 7px;
+    background-color: darkblue;
+    color: white;
+}
+
+@media (max-width: 291px) {
+    #boton1{
+        font-size: x-small;
+    }
+    #boton2{
+        font-size: x-small;
+    }
+}
+
+.archivo{
+    font-size: large;
+    color:black; 
+    background-color: lightgray;
+}
+@media (max-width: 397px) {
+    .archivo{
+        font-size: small;
+    }
+}
+
+@media (max-width: 323px) {
+    .archivo{
+        font-size: x-small;
+    }
+}

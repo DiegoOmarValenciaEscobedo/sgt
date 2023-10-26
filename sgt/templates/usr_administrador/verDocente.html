@@ -1,0 +1,100 @@
+{% extends 'layouts/base.html' %}
+
+{% block title %} Informacion Docente {% endblock title %}
+
+<!-- Specific CSS goes HERE -->
+{% block stylesheets %}
+<link rel="stylesheet" href="/static/assets/css/perfil_docente.css">
+{% endblock stylesheets %}
+
+{% block content %}
+
+<!-- Page content -->
+<div class="container-fluid">
+    {% if mensaje %}
+    <div class="alert alert-success mt-2" role="alert">
+        Actualizado correctamente!
+    </div>
+    {% endif %}
+    <div class="perfil row mt-2">
+        <div class="espacioFotoPerfil card bg-transparent col-12 col-md-5" style="height: 100%;">
+            <div class="card-body">
+                <div class="fotoPerfil">
+                    <img src="../../../media/{{ docente.fotoDePerfil }}" alt="FotoPerfil" class="image-fluid">
+                </div>
+            </div>
+        </div>
+        <div class="infoPerfil d-flex flex-column justify-content-center col-12 col-md-7 mt-1">
+            <form method="post">
+                {% csrf_token %}
+                <div class="espacioDatosGenerales">
+                    <div class="titulo">
+                        <h3>Datos generales</h3>
+                    </div>
+                    <div class="datos p-2">
+                        <div class="nombreDocente row col-12 mt-2">
+                            <p class="campo col-sm-4">Nombre:</p>
+                            {{ form.Nombre }}
+                        </div>
+                        <div class="nombreApellidos row col-12 mt-2">
+                            <p class="campo col-sm-4">Apellido paterno:</p>
+                            {{ form.AP }}
+                        </div>
+                        <div class="generoDocente row col-12 mt-2">
+                            <p class="campo col-sm-4">Apellido materno:</p>
+                            {{ form.AM }}
+                        </div>
+                        <div class="rfcDocente row col-12 mt-2">
+                            <p class="campo col-sm-4">RFC:</p>
+                            {{ form.RFC }}
+                            
+                        </div>
+                    </div>
+                </div>
+                <div class="espacioDatosEscolares mt-2">
+                    <div class="titulo">
+                        <h3>Datos escolares</h3>
+                    </div>
+                    <div class="datos p-2">
+                        <div class="correoElectronicoDocente row col-12 mt-2">
+                            <p class="campo col-sm-4">Correo electrónico:</p>
+                            {{ form.Correo }}
+                        </div>
+                        <div class="correoElectronicoDocente row col-12 mt-2">
+                            <p class="campo col-sm-4">Departamento:</p>
+                            {{ form.Departamento }}
+                        </div>
+                        <div class="telefonoDocente row col-12 mt-2">
+                            <p class="campo col-sm-4">Télefono:</p>
+                            {{ form.Telefono }}
+                        </div>
+                        <div class="cubiculoDocente row col-12 mt-2">
+                            <p class="campo col-sm-4">Cubículo:</p>
+                            {{ form.Cubiculo }}
+                        </div>
+                        <div class="edificioDocente row col-12 mt-2">
+                            <p class="campo col-sm-4">Contraseña:</p>
+                            {{ form.Contrasenia }}
+                        </div>
+                    </div>
+                </div>
+                <div class="botonCambiarPassword mt-2 text-center" style="width: 100%;">
+                    <button type="submit" class="btn btn-primary rounded-pill" style="background-color: #010780; color: white;">Guardar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+{% include "includes/footer.html" %}
+</div>
+
+{% endblock content %}
+
+<!-- Specific JS goes HERE -->
+{% block javascripts %}
+
+<script src="/static/assets/vendor/chart.js/dist/Chart.min.js"></script>
+<script src="/static/assets/vendor/chart.js/dist/Chart.extension.js"></script>
+
+{% endblock javascripts %}

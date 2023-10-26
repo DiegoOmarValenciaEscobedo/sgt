@@ -1,0 +1,17 @@
+.campo{
+  border: 1px solid #dee2e6;
+  border-radius: 0.25rem;
+  width: 100%;
+}
+
+.campoEdadSolicitante {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.campoSemestreSolicitante {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

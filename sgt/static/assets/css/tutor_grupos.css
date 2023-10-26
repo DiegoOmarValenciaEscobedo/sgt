@@ -1,0 +1,23 @@
+#circulo{
+    border: 10px solid #01075a;
+    width: 200px;
+    height: 200px;
+    margin-left: 100px;
+    margin-top: 10px;
+    font-size: larger;
+    -moz-border-radius: 50%;
+    -webkit-border-radius: 50%;
+    border-radius: 50%;
+    background: white;
+    color: black;
+}
+
+#circulo:hover{
+    background-color: #01075a;
+    color: white;
+}
+@media (min-width: 200px) { 
+    #circulo{
+        margin-left: 18px;
+    }
+}

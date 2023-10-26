@@ -1,0 +1,60 @@
+{% extends 'layouts/base.html' %}
+
+{% block title %} Grupos {% endblock title %}
+
+<!-- Specific CSS goes HERE -->
+{% block stylesheets %}
+<link rel="stylesheet" href="/static/assets/css/tutor_verGrupo.css">
+<link rel="stylesheet" href="https://cdn.datatables.net/1.12.1/css/dataTables.bootstrap5.min.css" />
+<link rel="stylesheet" href="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.min.css">
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs5/dt-1.12.1/r-2.3.0/datatables.min.css" />
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+{% endblock stylesheets %}
+
+{% block content %}
+
+<!-- Page content -->
+<div class="container-fluid">
+    <div style="width: 100% !important; padding-top: 10px;">
+        <table id="example" class="display table" style="width: 100%;">
+            <thead>
+                <tr style="background-color: black; color: white;">
+                    <th>Nombre</th>
+                    <th>Grupo</th>
+                    <th>Certificado</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for constancia in constancias%}
+                <tr>
+                    <td>{{request.user.nombre}} {{request.user.aPaterno}} {{request.user.aMaterno}}</td>
+                    <td>{{constancia.grupo.nombre}}</td>
+                    {% if constancia.grupo.constancia.ruta != null %}
+                        <td><a href="{{constancia.grupo.constancia.ruta}}" target="_blank">
+                            <span class="material-icons text-primary" title="Generar">system_update_alt</span>
+                        </a></td>
+                    {% else %}
+                        <td style="color: red;">No disponible</td>
+                    {% endif %}
+                </tr>
+                {% endfor %}
+            <tfoot>
+                <tr>
+                    <th>Nombre</th>
+                    <th>Grupo</th>
+                    <th>Certificado</th>
+                </tr>
+            </tfoot>
+        </table>
+    </div>
+
+{% include "includes/footer.html" %}
+</div>
+
+{% endblock content %}
+
+<!-- Specific JS goes HERE -->
+{% block javascripts %}
+
+
+{% endblock javascripts %}

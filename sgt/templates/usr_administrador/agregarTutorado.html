@@ -1,0 +1,89 @@
+{% extends 'layouts/base.html' %}
+
+{% block title %} Agregar Alumno {% endblock title %}
+
+<!-- Specific CSS goes HERE -->
+{% block stylesheets %}
+<link rel="stylesheet" href="/static/assets/css/perfil_docente.css">
+{% endblock stylesheets %}
+
+{% block content %}
+
+<!-- Page content -->
+<div class="container-fluid justify-content-center align-items-center">
+    {% if Mensaje %}
+    {% if id_err == '0' %}
+    <div class="alert alert-success mt-2" role="alert">
+        Registrado correctamente!
+    </div>
+    {% else %}
+    <div class="alert alert-warning mt-2" role="alert">
+        Ocurrio un error al registrar, verifique los datos.
+    </div>
+    {% endif %}
+    {% endif %}
+    <div class="perfil row mt-2 justify-content-center">
+        <div class="border border-info rounded-lg p-2 mt-2" style="width:fit-content;">
+            <h4>Informacion</h4>
+            <ul>
+                <li>La contraseña por defecto sera "sgt-NUMERODECONTROL", ejemplo "sgt-19121065".</li>
+                <li>Una vez registrado, el alumno debera ingresar a la plataforma a capturar sus datos.</li>
+                <li>El usuario podra acceder a la plataforma con su correo y contraseña generada.</li>
+            </ul>
+        </div>
+        <div class="infoPerfil d-flex flex-column justify-content-center col-12 col-md-7 mt-1">
+            <form action="" method="post">
+                {% csrf_token %}
+                <div class="espacioDatosGenerales">
+                    <div class="titulo text-center">
+                        <h3>Registrar nuevo alumno</h3>
+                    </div>
+                    <div class="datos p-2">
+                        <div class="nombreApellidos row col-12 mt-2">
+                            <p class="campo col-sm-4">Numero de control:</p>
+                            <p class="campo col-sm-8">{{ form.NoControl }}</p>
+                        </div>
+                        <div class="nombreApellidos row col-12 mt-2">
+                            <p class="campo col-sm-4">Grupo:</p>
+                            <p class="campo col-sm-8">{{ form.Grupo }}</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="botonCambiarPassword mt-2 text-center" style="width: 100%;">
+                    <button type="submit" class="btn btn-primary rounded-pill"
+                        style="background-color: #010780; color: white;">Registrar</button>
+                </div>
+            </form>
+        </div>
+       
+    </div>
+    {% if Credenciales %}
+    <div class="titulo text-center">
+        <h4>Credenciales generadas:</h4>
+    </div>
+    <div class="justify-content-center" style="width: 50%; border: solid 2px;">
+        <div class="nombreApellidos row col-12 mt-2">
+            <p class="campo col-sm-3">Correo:</p>
+            <p class="campo col-sm-5">{{ Credenciales.email }}</p>
+        </div>
+        <div class="nombreApellidos row col-12 mt-2">
+            <p class="campo col-sm-3">Contraseña:</p>
+            <p class="campo col-sm-5">sgt-{{ Credenciales.idTec }}</p>
+        </div>
+    </div>
+    {% endif %}
+</div>
+
+{% include "includes/footer.html" %}
+</div>
+
+{% endblock content %}
+
+<!-- Specific JS goes HERE -->
+{% block javascripts %}
+
+<script src="/static/assets/vendor/chart.js/dist/Chart.min.js"></script>
+<script src="/static/assets/vendor/chart.js/dist/Chart.extension.js"></script>
+
+{% endblock javascripts %}

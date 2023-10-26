@@ -1,0 +1,114 @@
+<!--
+=========================================================
+* Argon Dashboard - v1.2.0
+=========================================================
+* Product Page: https://www.creative-tim.com/product/argon-dashboard
+
+
+* Copyright  Creative Tim (http://www.creative-tim.com)
+* Coded by www.creative-tim.com
+
+
+
+=========================================================
+* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <title>
+        SGT - {% block title %} {% endblock %}
+    </title>
+
+    <!-- Favicon - loaded as static -->
+    <link rel="icon" href="/static/assets/img/brand/icono.png" type="image/png">
+    <!-- Fonts -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700">
+    <!-- Icons -->
+    <link rel="stylesheet" href="/static/assets/vendor/nucleo/css/nucleo.css" type="text/css">
+    <link rel="stylesheet" href="/static/assets/vendor/@fortawesome/fontawesome-free/css/all.min.css" type="text/css">
+    <script src="https://kit.fontawesome.com/f8c98ce04f.js" crossorigin="anonymous"></script>
+    <!-- Page plugins -->
+    <!-- Argon CSS -->
+    <link rel="stylesheet" href="/static/assets/css/argon.css?v=1.2.0" type="text/css">
+    <link rel="stylesheet" href="/static/assets/css/navbar.css">
+
+    <!-- Specific CSS goes HERE -->
+    {% block stylesheets %}{% endblock stylesheets %}
+    <link rel="stylesheet" href="/static/assets/css/tutorado/first_login.css">
+</head>
+
+<!-- Page content -->
+<div>
+    <nav class="navbar navbar-top navbar-expand navbar-dark bg-primary border-bottom p-0"
+        style="background-color: #7c3030 !important;">
+        <div class="container-fluid p-0">
+            <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
+                <img class="img-fluid" src="/static/assets/img/brand/Frame3.png"
+                    style="display:block !important; margin-left:auto !important; margin-right:auto !important; height: 40% !important;">
+            </div>
+        </div>
+    </nav>
+    <div class="container-fluid">
+        <div class="container contenedor">
+            <form id="formRegistro" method="POST">
+                {% csrf_token %}
+                <h1 class="bienvenida">¡Bienvenido! Para continuar por favor completa tu perfil.</h1>
+                <div>
+                    <h2 class="info">Información general</h2>
+                    <div class="infGeneralDiv">
+                        <p><label for="{{form.nombre.id_for_label}}">Ingresa tu nombre:</label></p>
+                        {{form.nombre}}
+                        <p><label for="{{form.aPaterno.id_for_label}}">Ingresa tu apellido paterno:</label></p>
+                        {{form.aPaterno}}
+                        <p><label for="{{form.aMaterno.id_for_label}}">Ingresa tu apellido materno:</label></p>
+                        {{form.aMaterno}}
+                        <p><label for="{{form.genero.id_for_label}}">Selecciona tu genero:</label></p>
+                        {{form.genero}}
+                        <p><label for="{{form.telefono.id_for_label}}">Ingresa tu teléfono:</label></p>
+                        {{form.telefono}}
+                        <p><label for="{{form.fechaDeNacimiento.id_for_label}}">Ingresa tu fecha de nacimiento:</label></p>
+                        {{form.fechaDeNacimiento}}
+                        <p><label for="{{form.curp.id_for_label}}">Ingresa tu CURP:</label></p>
+                        {{form.curp}}
+                        <p><label for="{{form.estadoCivil.id_for_label}}">Selecciona tu estado civil:</label></p>
+                        {{form.estadoCivil}}
+                        <p><label for="{{form.nss.id_for_label}}">Ingresa tu número de servicio médico:</label></p>
+                        {{form.nss}}
+                    </div>
+                </div>
+                <div>
+                    <h2 class="info">Información de contacto</h2>
+                    <div class="infoContactoDiv">
+                        <p><label for="{{form.entidadFed.id_for_label}}">Selecciona tu entidad federativa:</label></p>
+                        {{form.entidadFed}}
+                        <p><label for="{{form.municipio.id_for_label}}">Ingresa tu municipio:</label></p>
+                        {{form.municipio}}
+                        <p><label for="{{form.domicilio.id_for_label}}">Ingresa tu domicilio:</label></p>
+                        {{form.domicilio}}
+                        <p><label for="{{form.cp.id_for_label}}">Ingresa tu código postal:</label></p>
+                        {{form.cp}}
+                        <p><label for="{{form.contactConfianza.id_for_label}}">Ingresa un contacto de confianza:</label></p>
+                        {{form.contactConfianza}}
+                    </div>
+                </div>
+                <div>
+                    <h2 class="info">Términos y condiciones</h2>
+                    {{form.termycond}}
+                    <label for="{{form.termycond.id_for_label}}">He leído y acepto los <a href="/static/assets/documents/AVISO DE PRIVACIDAD INTEGRAL.pdf" target="_blank">términos y condiciones</a>.</label>
+                </div>
+                <div class="btnEnviar d-flex justify-content-center">
+                    <button type="submit" class="btn btn-primary rounded-pill" id="submitButton"
+                        style="font-size: 18px; font-weight: 400;">Enviar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<script src="/static/assets/js/jquery-3.5.1.js"></script>
+<script src="/static/assets/js/first_login.js"></script>

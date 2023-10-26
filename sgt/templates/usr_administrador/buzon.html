@@ -1,0 +1,36 @@
+{% extends 'layouts/base.html' %}
+
+{% block title %} Buzon {% endblock title %}
+
+<!-- Specific CSS goes HERE -->
+{% block stylesheets %}
+{% endblock stylesheets %}
+
+{% block content %}
+
+<!-- Page content -->
+<div class="container-fluid">
+    {% for queja in buzon %}
+    <div class="d-flex shadow-lg p-3 mb-5 bg-body rounded mt-4 justify-content-between" style="background-color:lightsteelblue;">
+        <p style="color: black; font-weight: 500;">{{  queja.texto }}</p>
+            <form method="POST" enctype="multipart/form-data">
+                {% csrf_token %}
+                <input type="text" name="id" id="id" value="{{queja.id}}" readonly hidden>
+                <input class="btn btn-primary" type="submit" value="Leido">
+            </form>
+    </div>
+    {% endfor %}
+</div>
+
+{% include "includes/footer.html" %}
+</div>
+
+{% endblock content %}
+
+<!-- Specific JS goes HERE -->
+{% block javascripts %}
+
+<script src="/static/assets/vendor/chart.js/dist/Chart.min.js"></script>
+<script src="/static/assets/vendor/chart.js/dist/Chart.extension.js"></script>
+
+{% endblock javascripts %}

@@ -1,0 +1,38 @@
+.pit{
+    box-shadow: none;
+}
+.pit .image{
+    height: 30vh;
+    width: 30vh;
+    border-radius: 50%;
+}
+.pit .image img{
+    height: 100%;
+    width: 100%;
+    border-radius: 50%;
+    border: 10px solid #01004B;
+}
+.pit p{
+    text-align: center;
+    font-weight: bold;
+    font-size: 2vh;
+}
+.pat{
+    box-shadow: none;
+}
+.pat .image{
+    height: 30vh;
+    width: 30vh;
+    border-radius: 50%;
+}
+.pat .image img{
+    height: 100%;
+    width: 100%;
+    border-radius: 50%;
+    border: 10px solid #01004B;
+}
+.pat p{
+    text-align: center;
+    font-weight: bold;
+    font-size: 2vh;
+}
